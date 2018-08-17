@@ -10,13 +10,9 @@ const Heart = styled.b`
   color: #e8044e;
 `;
 
-const Artisan = styled.b`
-  color: #6d00ed;
-`;
-
 const CreditBox = () => (
   <Box>
-    Made with <Heart>♥</Heart> by <Artisan>Artisan</Artisan>
+    Made with <Heart>♥</Heart>
   </Box>
 );
 

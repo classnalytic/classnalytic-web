@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import Helmet from 'react-helmet';
 import dynamic from 'next/dynamic';
-// import Router from 'next/router';
 
 import Loader from '../components/commons/Loader';
 
-const Login = dynamic(import('../components/pages/login'), {
+const Dashboard = dynamic(import('../components/pages/dashboard'), {
   loading: () => <Loader />
 });
 
@@ -18,7 +17,7 @@ const enhance = compose(
   )
 );
 
-class LoginPage extends Component {
+class DashboardPage extends Component {
   static async getInitialProps({ store }) {
     return { ...store };
   }
@@ -28,16 +27,16 @@ class LoginPage extends Component {
       <Fragment>
         <Helmet
           htmlAttributes={{ lang: 'th' }}
-          title="Smart Classroom | Login"
+          title="Smart Classroom | Dashboard"
           meta={[
             { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0' },
             { property: 'og:title', content: 'Smart Classroom' }
           ]}
         />
-        <Login />
+        <Dashboard />
       </Fragment>
     );
   }
 }
 
-export default enhance(LoginPage);
+export default enhance(DashboardPage);

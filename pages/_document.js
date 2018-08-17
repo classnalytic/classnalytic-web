@@ -32,10 +32,10 @@ export default class MyDocument extends Document {
     return (
       <Helmet
         htmlAttributes={{ lang: 'en' }}
-        title="ITForge VIA"
+        title="Smart Classroom"
         meta={[
           { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-          { property: 'og:title', content: 'Hello next.js!' }
+          { property: 'og:title', content: 'Smart Classroom' }
         ]}
         link={[{ rel: 'shortcut icon', type: 'image/png', href: `` }]}
       />
