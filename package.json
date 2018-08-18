@@ -2,15 +2,16 @@
   "name": "with-redux",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "antd": "^3.8.1",
     "babel-plugin-import": "^1.8.0",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-wrap-in-js": "^1.1.1",
+    "express": "^4.16.3",
     "formik": "^1.0.2",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",

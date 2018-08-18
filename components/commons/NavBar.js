@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Icon from 'antd/lib/icon';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -44,10 +45,16 @@ const NavBar = () => {
           <Title>Smart Classroom</Title>
         </Link>
         <Link href="/dashboard">
-          <Menu>Dashboard</Menu>
+          <Menu>
+            <Icon type="dashboard" /> Dashboard
+          </Menu>
         </Link>
-        <Menu>Settings</Menu>
-        <LogoutButton>Logout</LogoutButton>
+        <Menu>
+          <Icon type="setting" /> Settings
+        </Menu>
+        <LogoutButton>
+          <Icon type="logout" /> Logout
+        </LogoutButton>
       </MenuWrapper>
     </Container>
   );
