@@ -30,7 +30,7 @@ export default () => (
       <SubtitleText>Make classroom great again</SubtitleText>
 
       <Link href="/login">
-        <LoginButton>Sign in</LoginButton>
+        <LoginButton>Login</LoginButton>
       </Link>
       <CreditBox />
     </Card>

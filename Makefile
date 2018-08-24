@@ -1,5 +1,4 @@
 prod: 
-	docker build -t registry.gitlab.com/itforge-eros/via .
-
+	docker build -t registry.gitlab.com/wiput1999/naprock2018-web .
 push:
-	docker push registry.gitlab.com/itforge-eros/via
+	docker push registry.gitlab.com/wiput1999/naprock2018-web

@@ -1,5 +1,8 @@
+import React, { Component, Fragment } from 'react';
 import Link from 'next/link';
 import Icon from 'antd/lib/icon';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -37,27 +40,60 @@ const LogoutButton = Menu.extend`
   color: #f00;
 `;
 
-const NavBar = () => {
-  return (
-    <Container>
-      <MenuWrapper>
-        <Link href="/">
-          <Title>Smart Classroom</Title>
-        </Link>
-        <Link href="/dashboard">
-          <Menu>
-            <Icon type="dashboard" /> Dashboard
-          </Menu>
-        </Link>
-        <Menu>
-          <Icon type="setting" /> Settings
-        </Menu>
-        <LogoutButton>
-          <Icon type="logout" /> Logout
-        </LogoutButton>
-      </MenuWrapper>
-    </Container>
-  );
-};
+const enhance = compose(
+  connect(
+    (state) => state,
+    {}
+  )
+);
 
-export default NavBar;
+class NavBar extends Component {
+  static async getInitialProps({ store }) {
+    return { ...store };
+  }
+  render() {
+    const {
+      user: { login }
+    } = this.props;
+
+    return (
+      <Container>
+        <MenuWrapper>
+          <Link href="/">
+            <Title>Smart Classroom</Title>
+          </Link>
+          {login ? (
+            <Fragment>
+              <Link href="/dashboard">
+                <Menu>
+                  <Icon type="dashboard" /> Dashboard
+                </Menu>
+              </Link>
+              <Menu>
+                <Icon type="setting" /> Settings
+              </Menu>
+              <LogoutButton>
+                <Icon type="logout" /> Logout
+              </LogoutButton>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Link href="/">
+                <Menu>
+                  <Icon type="home" /> Home
+                </Menu>
+              </Link>
+              <Link href="/login">
+                <Menu>
+                  <Icon type="login" /> Login
+                </Menu>
+              </Link>
+            </Fragment>
+          )}
+        </MenuWrapper>
+      </Container>
+    );
+  }
+}
+
+export default enhance(NavBar);

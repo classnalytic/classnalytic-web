@@ -10,6 +10,17 @@ app
   .then(() => {
     const server = express();
 
+    if (process.env.NODE_ENV !== 'production') {
+      const proxy = require('http-proxy-middleware');
+      server.use('/api', proxy({ target: 'http://localhost:5000', changeOrigin: true }));
+    }
+
+    server.get('/classroom/detail/:id', (req, res) => {
+      const actualPage = '/classroom/detail';
+      const queryParams = { id: req.params.id };
+      app.render(req, res, actualPage, queryParams);
+    });
+
     server.get('*', (req, res) => {
       return handle(req, res);
     });

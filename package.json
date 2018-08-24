@@ -2,7 +2,7 @@
   "name": "with-redux",
   "version": "1.0.0",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "nodemon server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js"
   },
@@ -12,7 +12,7 @@
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-wrap-in-js": "^1.1.1",
     "express": "^4.16.3",
-    "formik": "^1.0.2",
+    "formik": "^1.0.3",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
     "next": "^6.1.1",
@@ -30,11 +30,24 @@
     "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
+    "redux-promise-middleware": "^5.1.1",
     "redux-thunk": "^2.1.0",
-    "styled-components": "^3.4.2"
+    "styled-components": "^3.4.2",
+    "yup": "^0.26.2"
   },
   "license": "ISC",
+  "nodemonConfig": {
+    "ignore": [
+      ".next/*",
+      "node_modules/*"
+    ],
+    "watch": [
+      "server.js"
+    ]
+  },
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.5.1"
+    "babel-plugin-styled-components": "^1.5.1",
+    "http-proxy-middleware": "^0.18.0",
+    "nodemon": "^1.18.3"
   }
 }

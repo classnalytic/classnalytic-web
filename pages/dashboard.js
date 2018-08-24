@@ -18,7 +18,8 @@ const enhance = compose(
 );
 
 class DashboardPage extends Component {
-  static async getInitialProps({ store }) {
+  static async getInitialProps({ store, query: { id } }) {
+    console.log(id);
     return { ...store };
   }
 
