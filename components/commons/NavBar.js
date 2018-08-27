@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import styled from 'styled-components';
 
+import { doLogout } from '../../redux/user';
+
 const Container = styled.div`
   position: absolute;
   top: 0;
@@ -43,7 +45,7 @@ const LogoutButton = Menu.extend`
 const enhance = compose(
   connect(
     (state) => state,
-    {}
+    { doLogout }
   )
 );
 
@@ -51,16 +53,18 @@ class NavBar extends Component {
   static async getInitialProps({ store }) {
     return { ...store };
   }
+
   render() {
     const {
-      user: { login }
+      user: { login },
+      doLogout
     } = this.props;
 
     return (
       <Container>
         <MenuWrapper>
           <Link href="/">
-            <Title>Smart Classroom</Title>
+            <Title>Classnalytic</Title>
           </Link>
           {login ? (
             <Fragment>
@@ -72,7 +76,7 @@ class NavBar extends Component {
               <Menu>
                 <Icon type="setting" /> Settings
               </Menu>
-              <LogoutButton>
+              <LogoutButton onClick={() => doLogout()}>
                 <Icon type="logout" /> Logout
               </LogoutButton>
             </Fragment>

@@ -2,6 +2,7 @@ import React from 'react';
 import Icon from 'antd/lib/icon';
 import Box from '../commons/Box';
 import Button from '../commons/Button';
+import Link from 'next/link';
 
 const ClassroomBox = Box.extend`
   background-color: #ffffff;
@@ -43,9 +44,11 @@ export default ({ id, subject, room, time }) => (
     <br />
     Time : {time}
     <br />
-    <EnterButton>
-      <Icon type="login" /> Enter
-    </EnterButton>
+    <Link href={`/classroom/detail?id=${id}`} as={`/classroom/detail/${id}`}>
+      <EnterButton>
+        <Icon type="login" /> Enter
+      </EnterButton>
+    </Link>
     <ConfigButton>
       <Icon type="setting" /> Config
     </ConfigButton>

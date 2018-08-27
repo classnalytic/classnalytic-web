@@ -21,10 +21,10 @@ const LandingPage = () => (
   <Fragment>
     <Helmet
       htmlAttributes={{ lang: 'th' }}
-      title="Smart Classroom"
+      title="Classnalytic"
       meta={[
         { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0' },
-        { property: 'og:title', content: 'Smart Classroom' }
+        { property: 'og:title', content: 'Classnalytic' }
       ]}
     />
     <Landing />

@@ -26,7 +26,7 @@ const SubtitleText = Subtitle.extend`
 export default () => (
   <Container>
     <Card>
-      <Title>Smart Classroom</Title>
+      <Title>Classnalytic</Title>
       <SubtitleText>Make classroom great again</SubtitleText>
 
       <Link href="/login">

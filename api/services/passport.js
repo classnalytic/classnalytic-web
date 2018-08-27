@@ -16,11 +16,12 @@ passport.use(
 
     user = user.dataValues;
 
+    delete user.password;
+    delete user.createdAt;
+    delete user.updatedAt;
+
     return done(null, {
-      id: user.id,
-      username: user.username,
-      role: user.role,
-      enabled: user.enabled
+      ...user
     });
   })
 );

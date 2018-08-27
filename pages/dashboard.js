@@ -1,10 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'recompose';
+import { compose, lifecycle } from 'recompose';
 import Helmet from 'react-helmet';
 import dynamic from 'next/dynamic';
+import Router from 'next/router';
 
 import Loader from '../components/commons/Loader';
+
+import { setClassrooms } from '../redux/classroom';
+import { checkLogin } from '../redux/user';
 
 const Dashboard = dynamic(import('../components/pages/dashboard'), {
   loading: () => <Loader />
@@ -13,28 +17,42 @@ const Dashboard = dynamic(import('../components/pages/dashboard'), {
 const enhance = compose(
   connect(
     (state) => state,
-    {}
-  )
+    { setClassrooms, checkLogin }
+  ),
+  lifecycle({
+    componentWillMount() {
+      const { checkLogin } = this.props;
+      checkLogin();
+    }
+  })
 );
 
 class DashboardPage extends Component {
-  static async getInitialProps({ store, query: { id } }) {
-    console.log(id);
+  static async getInitialProps({ store }) {
     return { ...store };
   }
 
+  componentDidMount() {
+    this.props.setClassrooms();
+  }
+
   render() {
+    const {
+      classroom: { loading, classrooms }
+    } = this.props;
+
     return (
       <Fragment>
+        {loading && <Loader />}
         <Helmet
           htmlAttributes={{ lang: 'th' }}
-          title="Smart Classroom | Dashboard"
+          title="Classnalytic | Dashboard"
           meta={[
             { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0' },
-            { property: 'og:title', content: 'Smart Classroom' }
+            { property: 'og:title', content: 'Classnalytic' }
           ]}
         />
-        <Dashboard />
+        {typeof classrooms.success === 'undefined' && <Dashboard classrooms={classrooms} />}
       </Fragment>
     );
   }

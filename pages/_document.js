@@ -32,10 +32,10 @@ export default class MyDocument extends Document {
     return (
       <Helmet
         htmlAttributes={{ lang: 'en' }}
-        title="Smart Classroom"
+        title="Classnalytic"
         meta={[
           { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-          { property: 'og:title', content: 'Smart Classroom' }
+          { property: 'og:title', content: 'Classnalytic' }
         ]}
         link={[{ rel: 'shortcut icon', type: 'image/png', href: `` }]}
       />
