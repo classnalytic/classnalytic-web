@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { compose, lifecycle } from 'recompose';
+import { compose } from 'recompose';
 import Helmet from 'react-helmet';
 import dynamic from 'next/dynamic';
 
 import Loader from '../../components/commons/Loader';
+import Protected from '../../components/commons/Protected';
 
 import { getClassroomDetail } from '../../redux/classroom';
 import { checkLogin } from '../../redux/user';
@@ -20,12 +21,6 @@ const enhance = compose(
     (state) => state,
     { getClassroomDetail, checkLogin }
   )
-  // lifecycle({
-  //   componentWillMount() {
-  //     const { checkLogin } = this.props;
-  //     checkLogin();
-  //   }
-  // })
 );
 
 class ClassroomPage extends Component {
@@ -36,11 +31,8 @@ class ClassroomPage extends Component {
   componentDidMount() {
     const {
       getClassroomDetail,
-      checkLogin,
       query: { id }
     } = this.props;
-
-    checkLogin();
 
     getClassroomDetail(id);
   }
@@ -65,7 +57,7 @@ class ClassroomPage extends Component {
             { property: 'og:title', content: 'Classnalytic' }
           ]}
         />
-        {found ? <Classroom classroom={classroom} /> : <NotFound />}
+        <Protected>{found ? <Classroom classroom={classroom} /> : <NotFound />}</Protected>
       </Fragment>
     );
   }

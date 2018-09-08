@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
-import { compose, lifecycle } from 'recompose';
+import { compose } from 'recompose';
+import Router from 'next/router';
 
 import { checkLogin } from '../../redux/user';
 
@@ -8,13 +9,7 @@ const enhance = compose(
   connect(
     (state) => state,
     { checkLogin }
-  ),
-  lifecycle({
-    componentWillMount() {
-      const { checkLogin } = this.props;
-      checkLogin();
-    }
-  })
+  )
 );
 
 class Protected extends Component {
@@ -23,9 +18,15 @@ class Protected extends Component {
   }
 
   render() {
-    const { Component } = this.props;
+    const {
+      children,
+      user: { login },
+      checkLogin
+    } = this.props;
 
-    return <Component />;
+    checkLogin();
+
+    return login ? children : <div />;
   }
 }
 

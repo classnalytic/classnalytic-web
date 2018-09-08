@@ -1,14 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { compose, lifecycle } from 'recompose';
+import { compose } from 'recompose';
 import Helmet from 'react-helmet';
 import dynamic from 'next/dynamic';
-import Router from 'next/router';
 
 import Loader from '../components/commons/Loader';
+import Protected from '../components/commons/Protected';
 
 import { setClassrooms } from '../redux/classroom';
-import { checkLogin } from '../redux/user';
 
 const Dashboard = dynamic(import('../components/pages/dashboard'), {
   loading: () => <Loader />
@@ -17,14 +16,8 @@ const Dashboard = dynamic(import('../components/pages/dashboard'), {
 const enhance = compose(
   connect(
     (state) => state,
-    { setClassrooms, checkLogin }
-  ),
-  lifecycle({
-    componentWillMount() {
-      const { checkLogin } = this.props;
-      checkLogin();
-    }
-  })
+    { setClassrooms }
+  )
 );
 
 class DashboardPage extends Component {
@@ -52,7 +45,7 @@ class DashboardPage extends Component {
             { property: 'og:title', content: 'Classnalytic' }
           ]}
         />
-        {typeof classrooms.success === 'undefined' && <Dashboard classrooms={classrooms} />}
+        <Protected>{!classrooms.success && <Dashboard classrooms={classrooms} />}</Protected>
       </Fragment>
     );
   }
