@@ -29,7 +29,12 @@ export const setClassrooms = () => {
     axios
       .get('/api/classroom')
       .then(({ data }) => data)
-      .then((classrooms) => dispatch({ type: SET_CLASSROOM, classrooms }))
+      .then((classrooms) => {
+        if (!Array.isArray(classrooms)) {
+          classrooms = [];
+        }
+        dispatch({ type: SET_CLASSROOM, classrooms });
+      })
       .catch(() => dispatch({ type: SET_CLASSROOM, classrooms: [] }));
 };
 

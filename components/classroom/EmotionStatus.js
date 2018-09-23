@@ -10,6 +10,7 @@ import Fear from './assets/emotion_fear.svg';
 import Happy from './assets/emotion_happy.svg';
 import Neutral from './assets/emotion_neutral.svg';
 import Surprise from './assets/emotion_surprise.svg';
+import Sadness from './assets/emotion_sad.svg';
 
 const Image = styled.img`
   width: 100%;
@@ -27,66 +28,71 @@ const EmotionPercent = styled.div`
   text-align: center;
 `;
 
-const EmotionTitle = Title.extend`
+const EmotionTitle = styled(Title)`
+  width: 100%;
   font-size: 2em;
   text-decoration: underline;
 `;
 
-const EmotionStatus = () => {
+const EmotionStatus = ({ emotions }) => {
+  let { fear, sadness, neutral, surprise, happiness, contempt, disgust, anger } = emotions;
   return (
     <EmotionContainer>
       <Row>
-        <Col span={24}>
-          <EmotionTitle>Overall Emotions</EmotionTitle>
-        </Col>
+        <EmotionTitle>Overall Emotions</EmotionTitle>
       </Row>
       <Row gutter={16}>
-        <Col span={3}>
+        <Col md={3}>
           <Image src={Anger} />
         </Col>
-        <Col span={3}>
+        <Col md={3}>
           <Image src={Contempt} />
         </Col>
-        <Col span={3}>
+        <Col md={3}>
           <Image src={Disgust} />
         </Col>
-        <Col span={3}>
+        <Col md={3}>
+          <Image src={Sadness} />
+        </Col>
+        <Col md={3}>
           <Image src={Fear} />
         </Col>
-        <Col span={3}>
+        <Col md={3}>
           <Image src={Happy} />
         </Col>
-        <Col span={3}>
+        <Col md={3}>
           <Image src={Neutral} />
         </Col>
-        <Col span={3}>
+        <Col md={3}>
           <Image src={Surprise} />
         </Col>
-        <Col span={3} />
+        <Col />
       </Row>
       <Row gutter={16}>
-        <Col span={3}>
-          <EmotionPercent>10%</EmotionPercent>
+        <Col md={3}>
+          <EmotionPercent>{anger}%</EmotionPercent>
         </Col>
-        <Col span={3}>
-          <EmotionPercent>15%</EmotionPercent>
+        <Col md={3}>
+          <EmotionPercent>{contempt}%</EmotionPercent>
         </Col>
-        <Col span={3}>
-          <EmotionPercent>1%</EmotionPercent>
+        <Col md={3}>
+          <EmotionPercent>{disgust}%</EmotionPercent>
         </Col>
-        <Col span={3}>
-          <EmotionPercent>0%</EmotionPercent>
+        <Col md={3}>
+          <EmotionPercent>{sadness}%</EmotionPercent>
         </Col>
-        <Col span={3}>
-          <EmotionPercent>60%</EmotionPercent>
+        <Col md={3}>
+          <EmotionPercent>{fear}%</EmotionPercent>
         </Col>
-        <Col span={3}>
-          <EmotionPercent>10%</EmotionPercent>
+        <Col md={3}>
+          <EmotionPercent>{happiness}%</EmotionPercent>
         </Col>
-        <Col span={3}>
-          <EmotionPercent>4%</EmotionPercent>
+        <Col md={3}>
+          <EmotionPercent>{neutral}%</EmotionPercent>
         </Col>
-        <Col span={3} />
+        <Col md={3}>
+          <EmotionPercent>{surprise}%</EmotionPercent>
+        </Col>
       </Row>
     </EmotionContainer>
   );

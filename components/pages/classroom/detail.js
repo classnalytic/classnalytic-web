@@ -1,6 +1,8 @@
 import { Row, Col } from 'antd';
 import styled from 'styled-components';
 
+// import Webcam from 'react-webcam';
+
 import Container from '../../commons/Container';
 import CreditBox from '../../commons/CreditBox';
 import Title from '../../commons/Title';
@@ -12,19 +14,17 @@ import VideoBox from '../../classroom/VideoBox';
 import InfoBox from '../../classroom/InfoBox';
 import NameListBox from '../../classroom/NameListBox';
 
-import Video from '../../classroom/assets/video.jpg';
-
-const InfoTitle = Title.extend`
+const InfoTitle = styled(Title)`
   font-size: 2em;
   text-decoration: underline;
 `;
 
-const StudentTitle = Title.extend`
+const StudentTitle = styled(Title)`
   font-size: 2em;
   text-decoration: underline;
 `;
 
-const StudentChecked = Subtitle.extend`
+const StudentChecked = styled(Subtitle)`
   color: #000;
   font-size: 1em;
   margin-top: 1em;
@@ -59,6 +59,7 @@ const StudentListChild = styled.li`
 const ClassroomDetail = ({ classroom }) => {
   let subjectName = classroom.subject.name;
   let roomName = classroom.room.name;
+
   let startTime = new Date(classroom.startTime).toLocaleTimeString('en-US', {
     hour: '2-digit',
     minute: '2-digit',
@@ -70,6 +71,11 @@ const ClassroomDetail = ({ classroom }) => {
     hour12: true
   });
   let time = startTime + ' - ' + endTime;
+
+  let attendances = classroom.attendances;
+  let actions = classroom.actions;
+  let emotions = classroom.emotions;
+
   return (
     <Container>
       <Title>Classroom Panel</Title>
@@ -77,11 +83,8 @@ const ClassroomDetail = ({ classroom }) => {
       <br />
       <Row gutter={16}>
         <Col span={16}>
-          <VideoBox>
-            <InfoTitle>Video</InfoTitle>
-            <img src={Video} style={{ width: '100%' }} />
-          </VideoBox>
-          <EmotionStatus />
+          <VideoBox id={classroom.id} />
+          <EmotionStatus emotions={emotions} />
         </Col>
         <Col span={8}>
           <InfoBox>
@@ -102,19 +105,20 @@ const ClassroomDetail = ({ classroom }) => {
             <StudentTitle>Students</StudentTitle>
             <NameListBox>
               <StudentList>
-                <StudentListChild>Wiput Pootong</StudentListChild>
-                <StudentListChild>Phongsathorn Kittiworapanya</StudentListChild>
-                <StudentListChild>Vasin Sermsampan</StudentListChild>
-                <StudentListChild>Siwakorn Lert</StudentListChild>
-                <StudentListChild>Kawisara Bunyen</StudentListChild>
-                <StudentListChild>Teerapat Kraisrisirikul</StudentListChild>
-                <StudentListChild>Thanapon Wongprasert</StudentListChild>
+                {attendances.map((attendance) => {
+                  let user = attendance.user;
+                  return (
+                    <StudentListChild key={attendance.id}>
+                      {user.firstname} {user.lastname}
+                    </StudentListChild>
+                  );
+                })}
               </StudentList>
             </NameListBox>
-            <StudentChecked>25 Students</StudentChecked>
+            <StudentChecked>{attendances.length} Student(s)</StudentChecked>
           </InfoBox>
           <InfoBox>
-            <ActionStatus />
+            <ActionStatus actions={actions} />
           </InfoBox>
         </Col>
       </Row>

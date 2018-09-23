@@ -1,7 +1,6 @@
-import { Component } from 'react';
+import { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import Router from 'next/router';
 
 import { checkLogin } from '../../redux/user';
 
@@ -26,7 +25,7 @@ class Protected extends Component {
 
     checkLogin();
 
-    return login ? children : <div />;
+    return login ? children : <Fragment />;
   }
 }
 

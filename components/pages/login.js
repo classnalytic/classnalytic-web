@@ -1,4 +1,6 @@
 import { Fragment } from 'react';
+import styled from 'styled-components';
+
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 import { compose } from 'recompose';
@@ -12,7 +14,7 @@ import CreditBox from '../commons/CreditBox';
 import Title from '../commons/Title';
 import Loader from '../commons/Loader';
 
-const LoginButton = Button.extend`
+const LoginButton = styled(Button)`
   background-color: #6d00ed;
   width: 100%;
   color: #fff;

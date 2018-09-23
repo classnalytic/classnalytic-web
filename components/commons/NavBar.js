@@ -38,7 +38,7 @@ const Menu = styled.li`
   cursor: pointer;
 `;
 
-const LogoutButton = Menu.extend`
+const LogoutButton = styled(Menu)`
   color: #f00;
 `;
 
@@ -71,6 +71,11 @@ class NavBar extends Component {
               <Link href="/dashboard">
                 <Menu>
                   <Icon type="dashboard" /> Dashboard
+                </Menu>
+              </Link>
+              <Link href="/students">
+                <Menu>
+                  <Icon type="user" /> Students
                 </Menu>
               </Link>
               <Menu>

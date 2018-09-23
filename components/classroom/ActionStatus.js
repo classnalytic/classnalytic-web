@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 import Title from '../commons/Title';
+import ActionListBox from './ActionListBox';
 
-const ActionContainer = styled.div``;
+const ActionContainer = ActionListBox;
 
-const ActionTitle = Title.extend`
+const ActionTitle = styled(Title)`
   font-size: 2em;
   text-decoration: underline;
 `;
@@ -21,12 +22,24 @@ const ActionListChild = styled.li`
   font-weight: 300;
 `;
 
-const ActionStatus = () => {
+const ActionStatus = ({ actions }) => {
   return (
     <ActionContainer>
       <ActionTitle>Actions Logging</ActionTitle>
       <ActionList>
-        <ActionListChild>10:21 AM Hand up</ActionListChild>
+        {actions.map((action) => {
+          let time = new Date(action.time).toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+          });
+
+          return (
+            <ActionListChild key={action.id}>
+              {time} {action.action}
+            </ActionListChild>
+          );
+        })}
       </ActionList>
     </ActionContainer>
   );

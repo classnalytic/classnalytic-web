@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 const Box = styled.p`
   width: 100%;
-  padding-top: 1em;
+  margin-top: 1em;
+  padding: 2em;
   text-align: center;
 `;
 

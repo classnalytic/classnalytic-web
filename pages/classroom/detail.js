@@ -57,7 +57,7 @@ class ClassroomPage extends Component {
             { property: 'og:title', content: 'Classnalytic' }
           ]}
         />
-        <Protected>{found ? <Classroom classroom={classroom} /> : <NotFound />}</Protected>
+        <Protected>{found ? <Classroom classroom={classroom} /> : !loading && <NotFound />}</Protected>
       </Fragment>
     );
   }

@@ -35,7 +35,10 @@ export const doLogin = (username, password) => {
     axios
       .post('/api/auth', { username, password })
       .then(({ data }) => data)
-      .then((user) => dispatch({ type: DO_LOGIN, user }))
+      .then((user) => {
+        dispatch({ type: DO_LOGIN, user });
+        Router.replace('/dashboard');
+      })
       .catch(() => dispatch({ type: DO_LOGIN, user: { info: {}, login: false } }));
 };
 

@@ -28,10 +28,13 @@ const Emotions = EmotionsModel(sequelize, Sequelize);
 const Attendance = AttendanceModel(sequelize, Sequelize);
 const Actions = ActionsModel(sequelize, Sequelize);
 
-// Join Classroom to Subjects and Rooms
+// Join Classroom to Subjects, Rooms, Enrolls, Emotions, Actions and Attendance
 Classrooms.belongsTo(Subjects, { foreignKey: 'subjectId' });
 Classrooms.belongsTo(Rooms, { foreignKey: 'roomId' });
 Classrooms.hasMany(Enrolls, { foreignKey: 'classroomId', sourceKey: 'id' });
+Classrooms.hasMany(Emotions, { foreignKey: 'classroomId', sourceKey: 'id' });
+Classrooms.hasMany(Actions, { foreignKey: 'classroomId', sourceKey: 'id' });
+Classrooms.hasMany(Attendance, { foreignKey: 'classroomId', sourceKey: 'id' });
 
 // Join Enrolls to Classrooms and Users
 Enrolls.belongsTo(Classrooms, { foreignKey: 'classroomId' });
@@ -61,5 +64,6 @@ module.exports = {
   Enrolls,
   Emotions,
   Attendance,
-  Actions
+  Actions,
+  sequelize
 };

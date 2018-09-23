@@ -1,10 +1,11 @@
 import React from 'react';
+import styled from 'styled-components';
 import Icon from 'antd/lib/icon';
 import Box from '../commons/Box';
 import Button from '../commons/Button';
 import Link from 'next/link';
 
-const ClassroomBox = Box.extend`
+const ClassroomBox = styled(Box)`
   background-color: #ffffff;
   box-shadow: 0 2px 10px 5px rgba(0, 0, 0, 0.04);
   padding: 1em 2em;
@@ -12,7 +13,7 @@ const ClassroomBox = Box.extend`
   color: #000;
 `;
 
-const EnterButton = Button.extend`
+const EnterButton = styled(Button)`
   margin-top: 0.7em;
   box-shadow: 0 2px 10px 5px rgba(0, 0, 0, 0.04);
   border: 0;
@@ -27,7 +28,7 @@ const EnterButton = Button.extend`
   }
 `;
 
-const ConfigButton = EnterButton.extend`
+const ConfigButton = styled(EnterButton)`
   background-color: #ffbb33;
   margin-left: 0.5em;
 

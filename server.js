@@ -12,6 +12,7 @@ app
 
     if (process.env.NODE_ENV !== 'production') {
       const proxy = require('http-proxy-middleware');
+      server.use('/api/predict', proxy({ target: 'https://classnalytic.app', changeOrigin: true }));
       server.use('/api', proxy({ target: 'http://localhost:5000', changeOrigin: true }));
     }
 

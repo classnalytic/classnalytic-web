@@ -1,4 +1,4 @@
 build: 
-	docker build -t registry.gitlab.com/wiput1999/naprock2018-web/api .
+	docker build -t registry.itforge.io/classnalytic/api .
 push:
-	docker push registry.gitlab.com/wiput1999/naprock2018-web/api
+	docker push registry.itforge.io/classnalytic/api

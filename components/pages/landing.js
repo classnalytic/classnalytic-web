@@ -1,4 +1,6 @@
 import React from 'react';
+import styled from 'styled-components';
+
 import Link from 'next/link';
 
 import Container from '../commons/Container';
@@ -8,7 +10,7 @@ import CreditBox from '../commons/CreditBox';
 import Title from '../commons/Title';
 import Subtitle from '../commons/Subtitle';
 
-const LoginButton = Button.extend`
+const LoginButton = styled(Button)`
   background-color: #6d00ed;
   width: 100%;
   color: #fff;
@@ -19,7 +21,7 @@ const LoginButton = Button.extend`
   cursor: pointer;
 `;
 
-const SubtitleText = Subtitle.extend`
+const SubtitleText = styled(Subtitle)`
   margin-bottom: 1.5em;
 `;
 
