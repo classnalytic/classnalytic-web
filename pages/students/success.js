@@ -4,34 +4,30 @@ import { compose } from 'recompose';
 import Helmet from 'react-helmet';
 import dynamic from 'next/dynamic';
 
-import Loader from '../components/commons/Loader';
-import Protected from '../components/commons/Protected';
+import Loader from '../../components/commons/Loader';
+import Protected from '../../components/commons/Protected';
 
-import { setClassrooms, setLoading } from '../redux/classroom';
+import { setLoading } from '../../redux/student';
 
-const Dashboard = dynamic(import('../components/pages/dashboard'), {
+const StudentSuccess = dynamic(import('../../components/pages/student/success'), {
   loading: () => <Loader />
 });
 
 const enhance = compose(
   connect(
     (state) => state,
-    { setClassrooms, setLoading }
+    { setLoading }
   )
 );
 
-class DashboardPage extends Component {
-  static async getInitialProps({ store }) {
-    return { ...store };
-  }
-
-  componentDidMount() {
-    this.props.setClassrooms();
+class StudentNewPage extends Component {
+  static async getInitialProps({ store, query }) {
+    return { ...store, query };
   }
 
   render() {
     const {
-      classroom: { loading, classrooms },
+      student: { loading, studentId },
       setLoading
     } = this.props;
 
@@ -40,16 +36,18 @@ class DashboardPage extends Component {
         {loading && <Loader />}
         <Helmet
           htmlAttributes={{ lang: 'th' }}
-          title="Classnalytic | Dashboard"
+          title="Classnalytic | New Student"
           meta={[
             { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0' },
             { property: 'og:title', content: 'Classnalytic' }
           ]}
         />
-        <Protected>{!classrooms.success && <Dashboard classrooms={classrooms} setLoading={setLoading} />}</Protected>
+        <Protected>
+          <StudentSuccess setLoading={setLoading} />
+        </Protected>
       </Fragment>
     );
   }
 }
 
-export default enhance(DashboardPage);
+export default enhance(StudentNewPage);

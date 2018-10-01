@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+  namespace: classnalytic
+data:
+  DB_HOST: 'postgres'
+  DB_NAME: 'classnalytic'
+  DB_USER: 'postgres'
+  DB_PASS: 'root'

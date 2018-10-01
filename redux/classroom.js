@@ -2,11 +2,14 @@ import axios from 'axios';
 
 const SET_CLASSROOM = 'SET_CLASSROOM';
 const GET_CLASSROOM = 'GET_CLASSROOM';
+const SET_LOADING = 'SET_LOADING_CLASSROOM';
 
 const initialState = {
   loading: true,
   classrooms: [],
-  classroom: {}
+  classroom: {
+    found: false
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -16,6 +19,9 @@ const reducer = (state = initialState, action) => {
 
     case GET_CLASSROOM:
       return { ...state, loading: false, classroom: action.classroom };
+
+    case SET_LOADING:
+      return { ...state, loading: action.value };
 
     default:
       return state;
@@ -46,3 +52,8 @@ export const getClassroomDetail = (id) => {
       .then((classroom) => dispatch({ type: GET_CLASSROOM, classroom }))
       .catch(() => dispatch({ type: GET_CLASSROOM, classroom: {} }));
 };
+
+export const setLoading = (value) => ({
+  type: SET_LOADING,
+  value
+});

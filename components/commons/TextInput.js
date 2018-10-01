@@ -2,7 +2,7 @@ import FormItem from 'antd/lib/form/FormItem';
 import Icon from 'antd/lib/icon';
 import Input from 'antd/lib/input';
 
-export default ({ placeholder, icon, name, value, type, onChange, onBlur, error, message }) => (
+export default ({ placeholder, icon, name, value, type, onChange, onBlur, error, message, style }) => (
   <FormItem validateStatus={error ? 'error' : 'success'} help={error && message} hasFeedback={error}>
     <Input
       id={name}
@@ -14,6 +14,7 @@ export default ({ placeholder, icon, name, value, type, onChange, onBlur, error,
       placeholder={placeholder}
       onChange={onChange}
       onBlur={onBlur}
+      style={style}
     />
   </FormItem>
 );

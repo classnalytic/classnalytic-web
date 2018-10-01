@@ -5,7 +5,7 @@ import Title from '../commons/Title';
 import Subtitle from '../commons/Subtitle';
 import ClassroomBox from '../dashboard/ClassroomBox';
 
-export default ({ classrooms }) => (
+export default ({ classrooms, setLoading }) => (
   <Container>
     <Title>Classrooms List</Title>
     <Subtitle>Students are waiting for you</Subtitle>
@@ -29,6 +29,7 @@ export default ({ classrooms }) => (
             subject={classroom.classroom.subject.name}
             room={classroom.classroom.room.name}
             time={date}
+            setLoading={setLoading}
           />
         );
       })}

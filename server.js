@@ -16,7 +16,13 @@ app
       server.use('/api', proxy({ target: 'http://localhost:5000', changeOrigin: true }));
     }
 
-    server.get('/classroom/detail/:id', (req, res) => {
+    server.get('/classroom/:id/detail', (req, res) => {
+      const actualPage = '/classroom/detail';
+      const queryParams = { id: req.params.id };
+      app.render(req, res, actualPage, queryParams);
+    });
+
+    server.get('/classroom/:id/report', (req, res) => {
       const actualPage = '/classroom/detail';
       const queryParams = { id: req.params.id };
       app.render(req, res, actualPage, queryParams);
