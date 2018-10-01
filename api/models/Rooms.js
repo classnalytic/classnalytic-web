@@ -1,4 +1,4 @@
-const uuid = require('uuid/v4');
+const uuid = require('uuid/v4')
 
 module.exports = (sequelize, type) => {
   return sequelize.define('rooms', {
@@ -9,5 +9,5 @@ module.exports = (sequelize, type) => {
     },
     name: { type: type.STRING, notEmpty: false },
     description: type.TEXT
-  });
-};
+  })
+}

@@ -1,28 +1,28 @@
-const express = require('express');
+const express = require('express')
 
-const router = express.Router();
+const router = express.Router()
 
-const AuthticationMiddleware = require('../middlewares/AuthenticationMiddlewares');
-const { Users } = require('../services/sequelize');
+const AuthticationMiddleware = require('../middlewares/AuthenticationMiddlewares')
+const { Users } = require('../services/sequelize')
 
-router.use(AuthticationMiddleware);
+router.use(AuthticationMiddleware)
 
 router.post('/:id', async (req, res) => {
-  let id = req.params.id;
+  let id = req.params.id
 
   let user = await Users.findById(id)
     .then((data) => {
       if (!data) {
-        return { found: false };
+        return { found: false }
       }
 
-      delete user.password;
+      delete user.password
 
-      return { ...data.toJSON(), found: true };
+      return { ...data.toJSON(), found: true }
     })
-    .catch(() => ({ found: false }));
+    .catch(() => ({ found: false }))
 
-  return res.send({ ...user });
-});
+  return res.send({ ...user })
+})
 
-module.exports = router;
+module.exports = router

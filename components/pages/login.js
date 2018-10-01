@@ -1,18 +1,18 @@
-import { Fragment } from 'react';
-import styled from 'styled-components';
+import { Fragment } from 'react'
+import styled from 'styled-components'
 
-import { withFormik } from 'formik';
-import * as Yup from 'yup';
-import { compose } from 'recompose';
+import { withFormik } from 'formik'
+import * as Yup from 'yup'
+import { compose } from 'recompose'
 
-import Form from 'antd/lib/form';
-import Container from '../commons/Container';
-import Card from '../commons/Card';
-import TextInput from '../commons/TextInput';
-import Button from '../commons/Button';
-import CreditBox from '../commons/CreditBox';
-import Title from '../commons/Title';
-import Loader from '../commons/Loader';
+import Form from 'antd/lib/form'
+import Container from '../commons/Container'
+import Card from '../commons/Card'
+import TextInput from '../commons/TextInput'
+import Button from '../commons/Button'
+import CreditBox from '../commons/CreditBox'
+import Title from '../commons/Title'
+import Loader from '../commons/Loader'
 
 const LoginButton = styled(Button)`
   background-color: #6d00ed;
@@ -29,7 +29,7 @@ const LoginButton = styled(Button)`
     background-color: #aaa;
     cursor: default;
   }
-`;
+`
 
 const enhance = compose(
   withFormik({
@@ -43,13 +43,13 @@ const enhance = compose(
         .required('Password is required!')
     }),
     handleSubmit: (values, { setSubmitting, props }) => {
-      props.setLoading(true);
-      props.doLogin(values.username, values.password);
-      setSubmitting(false);
+      props.setLoading(true)
+      props.doLogin(values.username, values.password)
+      setSubmitting(false)
     },
     displayName: 'LoginForm'
   })
-);
+)
 
 const LoginPage = (props) => {
   const {
@@ -62,15 +62,15 @@ const LoginPage = (props) => {
     handleSubmit,
     isValid,
     user: { loading }
-  } = props;
+  } = props
 
   const keyEnterPress = (e) => {
     if (e.keyCode === 13 && e.shiftKey === false) {
-      e.preventDefault();
-      e.stopPropagation();
-      handleSubmit();
+      e.preventDefault()
+      e.stopPropagation()
+      handleSubmit()
     }
-  };
+  }
 
   return (
     <Fragment>
@@ -80,28 +80,28 @@ const LoginPage = (props) => {
           <Title>Login</Title>
           <Form onKeyPress={(e) => keyEnterPress(e)}>
             <TextInput
-              icon="user"
+              icon='user'
               onChange={handleChange}
               onBlur={handleBlur}
-              placeholder="Username"
-              name="username"
+              placeholder='Username'
+              name='username'
               value={values.username}
               error={errors.username && touched.username}
               message={errors.username}
-              type="text"
+              type='text'
             />
             <TextInput
-              icon="lock"
+              icon='lock'
               onChange={handleChange}
               onBlur={handleBlur}
-              placeholder="Password"
-              name="password"
+              placeholder='Password'
+              name='password'
               value={values.password}
               error={errors.password && touched.password}
               message={errors.password}
-              type="password"
+              type='password'
             />
-            <LoginButton type="button" onClick={handleSubmit} disabled={!isValid || isSubmitting}>
+            <LoginButton type='button' onClick={handleSubmit} disabled={!isValid || isSubmitting}>
               Login
             </LoginButton>
           </Form>
@@ -109,7 +109,7 @@ const LoginPage = (props) => {
         </Card>
       </Container>
     </Fragment>
-  );
-};
+  )
+}
 
-export default enhance(LoginPage);
+export default enhance(LoginPage)

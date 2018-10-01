@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from 'react';
-import Link from 'next/link';
-import Icon from 'antd/lib/icon';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
-import styled from 'styled-components';
+import React, { Component, Fragment } from 'react'
+import Link from 'next/link'
+import Icon from 'antd/lib/icon'
+import { connect } from 'react-redux'
+import { compose } from 'recompose'
+import styled from 'styled-components'
 
-import { doLogout } from '../../redux/user';
+import { doLogout } from '../../redux/user'
 
 const Container = styled.div`
   position: absolute;
@@ -13,7 +13,7 @@ const Container = styled.div`
   width: 100%;
   padding: 2em;
   z-index: 999;
-`;
+`
 
 const Title = styled.p`
   margin-bottom: 0 !important;
@@ -22,12 +22,12 @@ const Title = styled.p`
   font-weight: 500;
   color: #000;
   cursor: pointer;
-`;
+`
 
 const MenuWrapper = styled.ul`
   display: flex;
   list-style: none;
-`;
+`
 
 const Menu = styled.li`
   display: list-item;
@@ -36,73 +36,73 @@ const Menu = styled.li`
   font-weight: 300;
   color: #000;
   cursor: pointer;
-`;
+`
 
 const LogoutButton = styled(Menu)`
   color: #f00;
-`;
+`
 
 const enhance = compose(
   connect(
     (state) => state,
     { doLogout }
   )
-);
+)
 
 class NavBar extends Component {
-  static async getInitialProps({ store }) {
-    return { ...store };
+  static async getInitialProps ({ store }) {
+    return { ...store }
   }
 
-  render() {
+  render () {
     const {
       user: { login },
       doLogout
-    } = this.props;
+    } = this.props
 
     return (
       <Container>
         <MenuWrapper>
-          <Link href="/">
+          <Link href='/'>
             <Title>Classnalytic</Title>
           </Link>
           {login ? (
             <Fragment>
-              <Link href="/dashboard">
+              <Link href='/dashboard'>
                 <Menu>
-                  <Icon type="dashboard" /> Dashboard
+                  <Icon type='dashboard' /> Dashboard
                 </Menu>
               </Link>
-              <Link href="/students">
+              <Link href='/students'>
                 <Menu>
-                  <Icon type="user" /> Students
+                  <Icon type='user' /> Students
                 </Menu>
               </Link>
               <Menu>
-                <Icon type="setting" /> Settings
+                <Icon type='setting' /> Settings
               </Menu>
               <LogoutButton onClick={() => doLogout()}>
-                <Icon type="logout" /> Logout
+                <Icon type='logout' /> Logout
               </LogoutButton>
             </Fragment>
           ) : (
             <Fragment>
-              <Link href="/">
+              <Link href='/'>
                 <Menu>
-                  <Icon type="home" /> Home
+                  <Icon type='home' /> Home
                 </Menu>
               </Link>
-              <Link href="/login">
+              <Link href='/login'>
                 <Menu>
-                  <Icon type="login" /> Login
+                  <Icon type='login' /> Login
                 </Menu>
               </Link>
             </Fragment>
           )}
         </MenuWrapper>
       </Container>
-    );
+    )
   }
 }
 
-export default enhance(NavBar);
+export default enhance(NavBar)

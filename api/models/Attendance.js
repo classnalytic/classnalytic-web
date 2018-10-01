@@ -1,4 +1,4 @@
-const uuid = require('uuid/v4');
+const uuid = require('uuid/v4')
 
 module.exports = (sequelize, type) => {
   return sequelize.define('attendance', {
@@ -10,5 +10,5 @@ module.exports = (sequelize, type) => {
     userId: { type: type.UUID },
     classroomId: { type: type.UUID },
     time: { type: type.DATE, defaultValue: type.NOW }
-  });
-};
+  })
+}

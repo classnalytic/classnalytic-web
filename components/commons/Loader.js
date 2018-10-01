@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const Container = styled.div`
   position: absolute;
@@ -7,17 +7,17 @@ const Container = styled.div`
   height: 100vh;
   background-color: #fefefe;
   z-index: 1000;
-`;
+`
 
 const Loader = () => (
   <Container>
-    <div className="lds-ellipsis">
+    <div className='lds-ellipsis'>
       <div />
       <div />
       <div />
       <div />
     </div>
   </Container>
-);
+)
 
-export default Loader;
+export default Loader

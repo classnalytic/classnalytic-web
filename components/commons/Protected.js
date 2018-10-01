@@ -1,32 +1,32 @@
-import { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
+import { Component, Fragment } from 'react'
+import { connect } from 'react-redux'
+import { compose } from 'recompose'
 
-import { checkLogin } from '../../redux/user';
+import { checkLogin } from '../../redux/user'
 
 const enhance = compose(
   connect(
     (state) => state,
     { checkLogin }
   )
-);
+)
 
 class Protected extends Component {
-  static async getInitialProps({ store }) {
-    return { ...store };
+  static async getInitialProps ({ store }) {
+    return { ...store }
   }
 
-  render() {
+  render () {
     const {
       children,
       user: { login },
       checkLogin
-    } = this.props;
+    } = this.props
 
-    checkLogin();
+    checkLogin()
 
-    return login ? children : <Fragment />;
+    return login ? children : <Fragment />
   }
 }
 
-export default enhance(Protected);
+export default enhance(Protected)

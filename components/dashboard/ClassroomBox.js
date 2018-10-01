@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import Icon from 'antd/lib/icon';
-import Box from '../commons/Box';
-import Button from '../commons/Button';
-import Link from 'next/link';
+import React from 'react'
+import styled from 'styled-components'
+import Icon from 'antd/lib/icon'
+import Box from '../commons/Box'
+import Button from '../commons/Button'
+import Link from 'next/link'
 
 const ClassroomBox = styled(Box)`
   background-color: #ffffff;
@@ -11,7 +11,7 @@ const ClassroomBox = styled(Box)`
   padding: 1em 2em;
   margin-bottom: 2em;
   color: #000;
-`;
+`
 
 const EnterButton = styled(Button)`
   margin-top: 0.7em;
@@ -26,7 +26,7 @@ const EnterButton = styled(Button)`
   ${EnterButton}:hover {
     background-color: #007e33;
   }
-`;
+`
 
 const ConfigButton = styled(EnterButton)`
   background-color: #ffbb33;
@@ -35,7 +35,7 @@ const ConfigButton = styled(EnterButton)`
   ${ConfigButton}:hover {
     background-color: #ff8800;
   }
-`;
+`
 
 export default ({ id, subject, room, time, setLoading }) => (
   <ClassroomBox>
@@ -47,11 +47,11 @@ export default ({ id, subject, room, time, setLoading }) => (
     <br />
     <Link href={`/classroom/detail?id=${id}`} as={`/classroom/${id}/detail`}>
       <EnterButton onClick={() => setLoading(true)}>
-        <Icon type="login" /> Enter
+        <Icon type='login' /> Enter
       </EnterButton>
     </Link>
     <ConfigButton>
-      <Icon type="setting" /> Config
+      <Icon type='setting' /> Config
     </ConfigButton>
   </ClassroomBox>
-);
+)

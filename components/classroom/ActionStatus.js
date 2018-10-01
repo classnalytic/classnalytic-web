@@ -1,14 +1,14 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import Title from '../commons/Title';
-import ActionListBox from './ActionListBox';
+import Title from '../commons/Title'
+import ActionListBox from './ActionListBox'
 
-const ActionContainer = ActionListBox;
+const ActionContainer = ActionListBox
 
 const ActionTitle = styled(Title)`
   font-size: 2em;
   text-decoration: underline;
-`;
+`
 
 const ActionList = styled.ul`
   color: #222;
@@ -16,11 +16,11 @@ const ActionList = styled.ul`
   list-style-type: circle;
   padding-left: 1.5em;
   margin: 0;
-`;
+`
 
 const ActionListChild = styled.li`
   font-weight: 300;
-`;
+`
 
 const ActionStatus = ({ actions }) => {
   return (
@@ -32,17 +32,17 @@ const ActionStatus = ({ actions }) => {
             hour: '2-digit',
             minute: '2-digit',
             hour12: true
-          });
+          })
 
           return (
             <ActionListChild key={action.id}>
               {time} {action.action}
             </ActionListChild>
-          );
+          )
         })}
       </ActionList>
     </ActionContainer>
-  );
-};
+  )
+}
 
-export default ActionStatus;
+export default ActionStatus

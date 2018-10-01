@@ -1,11 +1,11 @@
 // Common Components
-import Container from '../../commons/Container';
-import CreditBox from '../../commons/CreditBox';
-import Title from '../../commons/Title';
-import Subtitle from '../../commons/Subtitle';
+import Container from '../../commons/Container'
+import CreditBox from '../../commons/CreditBox'
+import Title from '../../commons/Title'
+import Subtitle from '../../commons/Subtitle'
 
 // Custom Components
-import VideoBox from '../../student/NewVideoBox';
+import VideoBox from '../../student/NewVideoBox'
 
 const StudentNew = ({ setResult, setLoading }) => {
   return (
@@ -15,7 +15,7 @@ const StudentNew = ({ setResult, setLoading }) => {
       <VideoBox setResult={setResult} setLoading={setLoading} />
       <CreditBox />
     </Container>
-  );
-};
+  )
+}
 
-export default StudentNew;
+export default StudentNew

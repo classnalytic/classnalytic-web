@@ -1,9 +1,9 @@
-import Container from '../commons/Container';
-import CreditBox from '../commons/CreditBox';
-import Card from '../commons/Card';
-import Title from '../commons/Title';
-import Subtitle from '../commons/Subtitle';
-import ClassroomBox from '../dashboard/ClassroomBox';
+import Container from '../commons/Container'
+import CreditBox from '../commons/CreditBox'
+import Card from '../commons/Card'
+import Title from '../commons/Title'
+import Subtitle from '../commons/Subtitle'
+import ClassroomBox from '../dashboard/ClassroomBox'
 
 export default ({ classrooms, setLoading }) => (
   <Container>
@@ -15,13 +15,13 @@ export default ({ classrooms, setLoading }) => (
           hour: '2-digit',
           minute: '2-digit',
           hour12: true
-        });
+        })
         let end = new Date(classroom.classroom.endTime).toLocaleTimeString('en-US', {
           hour: '2-digit',
           minute: '2-digit',
           hour12: true
-        });
-        let date = start + ' - ' + end;
+        })
+        let date = start + ' - ' + end
         return (
           <ClassroomBox
             key={classroom.classroom.id}
@@ -31,9 +31,9 @@ export default ({ classrooms, setLoading }) => (
             time={date}
             setLoading={setLoading}
           />
-        );
+        )
       })}
     </Card>
     <CreditBox />
   </Container>
-);
+)

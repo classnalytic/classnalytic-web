@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export default styled.div`
   margin: 0 9em;
@@ -11,4 +11,4 @@ export default styled.div`
   @media (max-width: 320px) {
     margin: 0;
   }
-`;
+`

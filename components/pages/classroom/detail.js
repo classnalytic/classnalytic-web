@@ -1,34 +1,34 @@
-import { Row, Col } from 'antd';
-import styled from 'styled-components';
+import { Row, Col } from 'antd'
+import styled from 'styled-components'
 
 // import Webcam from 'react-webcam';
 
-import Container from '../../commons/Container';
-import CreditBox from '../../commons/CreditBox';
-import Title from '../../commons/Title';
-import Subtitle from '../../commons/Subtitle';
+import Container from '../../commons/Container'
+import CreditBox from '../../commons/CreditBox'
+import Title from '../../commons/Title'
+import Subtitle from '../../commons/Subtitle'
 
-import EmotionStatus from '../../classroom/EmotionStatus';
-import ActionStatus from '../../classroom/ActionStatus';
-import VideoBox from '../../classroom/VideoBox';
-import InfoBox from '../../classroom/InfoBox';
-import NameListBox from '../../classroom/NameListBox';
+import EmotionStatus from '../../classroom/EmotionStatus'
+import ActionStatus from '../../classroom/ActionStatus'
+import VideoBox from '../../classroom/VideoBox'
+import InfoBox from '../../classroom/InfoBox'
+import NameListBox from '../../classroom/NameListBox'
 
 const InfoTitle = styled(Title)`
   font-size: 2em;
   text-decoration: underline;
-`;
+`
 
 const StudentTitle = styled(Title)`
   font-size: 2em;
   text-decoration: underline;
-`;
+`
 
 const StudentChecked = styled(Subtitle)`
   color: #000;
   font-size: 1em;
   margin-top: 1em;
-`;
+`
 
 const InfoList = styled.ul`
   color: #222;
@@ -36,11 +36,11 @@ const InfoList = styled.ul`
   list-style-type: none;
   padding: 0;
   margin: 0;
-`;
+`
 
 const LightText = styled.b`
   font-weight: 300;
-`;
+`
 
 const StudentList = styled.ul`
   color: #222;
@@ -48,33 +48,33 @@ const StudentList = styled.ul`
   list-style-type: circle;
   padding-left: 1.5em;
   margin: 0;
-`;
+`
 
-const InfoListChild = styled.li``;
+const InfoListChild = styled.li``
 
 const StudentListChild = styled.li`
   font-weight: 300;
-`;
+`
 
 const ClassroomDetail = ({ classroom }) => {
-  let subjectName = classroom.subject.name;
-  let roomName = classroom.room.name;
+  let subjectName = classroom.subject.name
+  let roomName = classroom.room.name
 
   let startTime = new Date(classroom.startTime).toLocaleTimeString('en-US', {
     hour: '2-digit',
     minute: '2-digit',
     hour12: true
-  });
+  })
   let endTime = new Date(classroom.endTime).toLocaleTimeString('en-US', {
     hour: '2-digit',
     minute: '2-digit',
     hour12: true
-  });
-  let time = startTime + ' - ' + endTime;
+  })
+  let time = startTime + ' - ' + endTime
 
-  let attendances = classroom.attendances;
-  let actions = classroom.actions;
-  let emotions = classroom.emotions;
+  let attendances = classroom.attendances
+  let actions = classroom.actions
+  let emotions = classroom.emotions
 
   return (
     <Container>
@@ -106,12 +106,12 @@ const ClassroomDetail = ({ classroom }) => {
             <NameListBox>
               <StudentList>
                 {attendances.map((attendance) => {
-                  let user = attendance.user;
+                  let user = attendance.user
                   return (
                     <StudentListChild key={attendance.id}>
                       {user.firstname} {user.lastname}
                     </StudentListChild>
-                  );
+                  )
                 })}
               </StudentList>
             </NameListBox>
@@ -124,7 +124,7 @@ const ClassroomDetail = ({ classroom }) => {
       </Row>
       <CreditBox />
     </Container>
-  );
-};
+  )
+}
 
-export default ClassroomDetail;
+export default ClassroomDetail

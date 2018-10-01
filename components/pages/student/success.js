@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import styled from 'styled-components'
 
 // Common Components
-import Container from '../../commons/Container';
-import CreditBox from '../../commons/CreditBox';
-import Title from '../../commons/Title';
-import Subtitle from '../../commons/Subtitle';
-import Box from '../../commons/Box';
-import Image from '../../commons/Image';
+import Container from '../../commons/Container'
+import CreditBox from '../../commons/CreditBox'
+import Title from '../../commons/Title'
+import Subtitle from '../../commons/Subtitle'
+import Box from '../../commons/Box'
+import Image from '../../commons/Image'
 
-import SuccessIcon from './assets/success.svg';
+import SuccessIcon from './assets/success.svg'
 
 const Success = styled(Box)`
   background-color: #ffffff;
@@ -21,19 +21,19 @@ const Success = styled(Box)`
   @media (max-width: 320px) {
     padding: 1em;
   }
-`;
+`
 
 const SuccessImage = styled(Image)`
   padding: 2em;
   box-shadow: none;
-`;
+`
 
 class StudentSuccess extends Component {
-  componentDidMount() {
-    this.props.setLoading(false);
+  componentDidMount () {
+    this.props.setLoading(false)
   }
 
-  render() {
+  render () {
     return (
       <Container>
         <Success>
@@ -43,8 +43,8 @@ class StudentSuccess extends Component {
         </Success>
         <CreditBox />
       </Container>
-    );
+    )
   }
 }
 
-export default StudentSuccess;
+export default StudentSuccess
