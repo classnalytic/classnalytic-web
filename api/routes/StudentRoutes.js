@@ -11,7 +11,7 @@ router.post('/:id', async (req, res) => {
   let id = req.params.id
 
   let user = await Users.findById(id)
-    .then((data) => {
+    .then(data => {
       if (!data) {
         return { found: false }
       }

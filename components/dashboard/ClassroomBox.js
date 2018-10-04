@@ -23,7 +23,7 @@ const EnterButton = styled(Button)`
   outline: none;
   cursor: pointer;
 
-  ${EnterButton}:hover {
+  :hover {
     background-color: #007e33;
   }
 `
@@ -32,7 +32,7 @@ const ConfigButton = styled(EnterButton)`
   background-color: #ffbb33;
   margin-left: 0.5em;
 
-  ${ConfigButton}:hover {
+  :hover {
     background-color: #ff8800;
   }
 `

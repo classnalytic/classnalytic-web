@@ -1,47 +1,47 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
-import Helmet from 'react-helmet';
-import dynamic from 'next/dynamic';
-import Router from 'next/router';
+import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux'
+import { compose } from 'recompose'
+import Helmet from 'react-helmet'
+import dynamic from 'next/dynamic'
+import Router from 'next/router'
 
-import Loader from '../components/commons/Loader';
+import Loader from '../components/commons/Loader'
 
-import { doLogin, setLoading } from '../redux/user';
+import { doLogin, setLoading } from '../redux/user'
 
 const Login = dynamic(import('../components/pages/login'), {
   loading: () => <Loader />
-});
+})
 
 const enhance = compose(
   connect(
     (state) => state,
     { doLogin, setLoading }
   )
-);
+)
 
 class LoginPage extends Component {
-  static async getInitialProps({ store }) {
-    return { ...store };
+  static async getInitialProps ({ store }) {
+    return { ...store }
   }
 
-  render() {
+  render () {
     const {
       user,
       user: { login },
       doLogin,
       setLoading
-    } = this.props;
+    } = this.props
 
     if (user.login) {
-      Router.push('/dashboard');
+      Router.push('/dashboard')
     }
 
     return (
       <Fragment>
         <Helmet
           htmlAttributes={{ lang: 'th' }}
-          title="Classnalytic | Login"
+          title='Classnalytic | Login'
           meta={[
             { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0' },
             { property: 'og:title', content: 'Classnalytic' }
@@ -49,8 +49,8 @@ class LoginPage extends Component {
         />
         {!login && <Login user={user} doLogin={doLogin} setLoading={setLoading} />}
       </Fragment>
-    );
+    )
   }
 }
 
-export default enhance(LoginPage);
+export default enhance(LoginPage)

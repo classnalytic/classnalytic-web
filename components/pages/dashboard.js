@@ -10,7 +10,7 @@ export default ({ classrooms, setLoading }) => (
     <Title>Classrooms List</Title>
     <Subtitle>Students are waiting for you</Subtitle>
     <Card>
-      {classrooms.map((classroom) => {
+      {classrooms.map(classroom => {
         let start = new Date(classroom.classroom.startTime).toLocaleTimeString('en-US', {
           hour: '2-digit',
           minute: '2-digit',

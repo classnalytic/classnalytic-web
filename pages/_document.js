@@ -6,7 +6,8 @@ import Helmet from 'react-helmet'
 export default class MyDocument extends Document {
   static async getInitialProps ({ renderPage }) {
     const sheet = new ServerStyleSheet()
-    const page = renderPage((App) => (props) => sheet.collectStyles(<App {...props} />))
+    const page = renderPage(App => props =>
+      sheet.collectStyles(<App {...props} />))
     const styleTags = sheet.getStyleElement()
     return { ...page, styleTags, helmet: Helmet.renderStatic() }
   }
@@ -22,11 +23,11 @@ export default class MyDocument extends Document {
   }
 
   // should render on <head>
-  get helmetHeadComponents () {
-    return Object.keys(this.props.helmet)
-      .filter((el) => el !== 'htmlAttributes' && el !== 'bodyAttributes')
-      .map((el) => this.props.helmet[el].toComponent())
-  }
+  // get helmetHeadComponents () {
+  //   return Object.keys(this.props.helmet)
+  //     .filter(el => el !== 'htmlAttributes' && el !== 'bodyAttributes')
+  //     .map(el => this.props.helmet[el].toComponent())
+  // }
 
   get helmetJsx () {
     return (
@@ -47,8 +48,10 @@ export default class MyDocument extends Document {
       <html {...this.helmetHtmlAttrComponents}>
         <Head>
           {this.helmetJsx}
-          {this.helmetHeadComponents}
-          <link href='https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700' rel='stylesheet' />
+          <link
+            href='https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700'
+            rel='stylesheet'
+          />
           {this.props.styleTags}
           <style dangerouslySetInnerHTML={{ __html: styles }} />
         </Head>

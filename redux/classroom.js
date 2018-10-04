@@ -31,11 +31,11 @@ const reducer = (state = initialState, action) => {
 export default reducer
 
 export const setClassrooms = () => {
-  return (dispatch) =>
+  return dispatch =>
     axios
       .get('/api/classroom')
       .then(({ data }) => data)
-      .then((classrooms) => {
+      .then(classrooms => {
         if (!Array.isArray(classrooms)) {
           classrooms = []
         }
@@ -44,16 +44,16 @@ export const setClassrooms = () => {
       .catch(() => dispatch({ type: SET_CLASSROOM, classrooms: [] }))
 }
 
-export const getClassroomDetail = (id) => {
-  return (dispatch) =>
+export const getClassroomDetail = id => {
+  return dispatch =>
     axios
       .get(`/api/classroom/${id}`)
       .then(({ data }) => data)
-      .then((classroom) => dispatch({ type: GET_CLASSROOM, classroom }))
+      .then(classroom => dispatch({ type: GET_CLASSROOM, classroom }))
       .catch(() => dispatch({ type: GET_CLASSROOM, classroom: {} }))
 }
 
-export const setLoading = (value) => ({
+export const setLoading = value => ({
   type: SET_LOADING,
   value
 })

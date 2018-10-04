@@ -4,12 +4,7 @@ import { compose } from 'recompose'
 
 import { checkLogin } from '../../redux/user'
 
-const enhance = compose(
-  connect(
-    (state) => state,
-    { checkLogin }
-  )
-)
+const enhance = compose(connect(state => state, { checkLogin }))
 
 class Protected extends Component {
   static async getInitialProps ({ store }) {
@@ -17,11 +12,7 @@ class Protected extends Component {
   }
 
   render () {
-    const {
-      children,
-      user: { login },
-      checkLogin
-    } = this.props
+    const { children, user: { login }, checkLogin } = this.props
 
     checkLogin()
 

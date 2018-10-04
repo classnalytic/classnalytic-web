@@ -15,7 +15,7 @@ const VideoBox = styled.div`
 `
 
 const InfoTitle = styled(Title)`
-  font-size: 2em;   
+  font-size: 2em;
   text-decoration: underline;
 `
 
@@ -30,6 +30,11 @@ class Video extends Component {
     this.state = {
       image: ''
     }
+
+    this.setRef = this.setRef.bind(this)
+    this.capture = this.capture.bind(this)
+    this.ready = this.ready.bind(this)
+    this.post = this.post.bind(this)
   }
 
   setRef (webcam) {

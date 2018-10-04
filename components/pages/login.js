@@ -25,7 +25,7 @@ const LoginButton = styled(Button)`
   padding: 1em;
   cursor: pointer;
 
-  ${LoginButton}:disabled {
+  :disabled {
     background-color: #aaa;
     cursor: default;
   }
@@ -35,12 +35,8 @@ const enhance = compose(
   withFormik({
     mapPropsToValues: () => {},
     validationSchema: Yup.object().shape({
-      username: Yup.string()
-        .min(4, 'Username must be at least 4 characters')
-        .required('Username is required!'),
-      password: Yup.string()
-        .min(6, 'Password must be at least 6 characters')
-        .required('Password is required!')
+      username: Yup.string().min(4, 'Username must be at least 4 characters').required('Username is required!'),
+      password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required!')
     }),
     handleSubmit: (values, { setSubmitting, props }) => {
       props.setLoading(true)
@@ -51,7 +47,7 @@ const enhance = compose(
   })
 )
 
-const LoginPage = (props) => {
+const LoginPage = props => {
   const {
     values,
     touched,
@@ -64,7 +60,7 @@ const LoginPage = (props) => {
     user: { loading }
   } = props
 
-  const keyEnterPress = (e) => {
+  const keyEnterPress = e => {
     if (e.keyCode === 13 && e.shiftKey === false) {
       e.preventDefault()
       e.stopPropagation()
@@ -78,7 +74,7 @@ const LoginPage = (props) => {
       <Container>
         <Card>
           <Title>Login</Title>
-          <Form onKeyPress={(e) => keyEnterPress(e)}>
+          <Form onKeyPress={e => keyEnterPress(e)}>
             <TextInput
               icon='user'
               onChange={handleChange}

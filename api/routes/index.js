@@ -6,7 +6,7 @@ const AuthRoutes = require('./AuthRoutes')
 const ClassroomRoutes = require('./ClassroomRoutes')
 const StudentRoutes = require('./StudentRoutes')
 
-module.exports = (app) => {
+module.exports = app => {
   // Custom route like authentication
 
   router.use('/auth', AuthRoutes)

@@ -31,42 +31,38 @@ const reducer = (state = initialState, action) => {
 export default reducer
 
 export const doLogin = (username, password) => {
-  return (dispatch) =>
+  return dispatch =>
     axios
       .post('/api/auth', { username, password })
       .then(({ data }) => data)
-      .then((user) => {
+      .then(user => {
         dispatch({ type: DO_LOGIN, user })
         Router.replace('/dashboard')
       })
-      .catch(() => dispatch({ type: DO_LOGIN, user: { info: {}, login: false } }))
+      .catch(() =>
+        dispatch({ type: DO_LOGIN, user: { info: {}, login: false } })
+      )
 }
 
 export const doLogout = () => {
-  return (dispatch) =>
-    axios
-      .post('/api/auth/logout')
-      .then(({ data }) => data)
-      .then(() => {
+  return dispatch =>
+    axios.post('/api/auth/logout').then(({ data }) => data).then(() => {
+      dispatch({ type: DO_LOGOUT })
+      Router.push('/login')
+    })
+}
+
+export const checkLogin = host => {
+  return dispatch =>
+    axios.get('/api/auth').then(({ data }) => data).then(data => {
+      if (!data.login) {
         dispatch({ type: DO_LOGOUT })
         Router.push('/login')
-      })
+      }
+    })
 }
 
-export const checkLogin = (host) => {
-  return (dispatch) =>
-    axios
-      .get('/api/auth')
-      .then(({ data }) => data)
-      .then((data) => {
-        if (!data.login) {
-          dispatch({ type: DO_LOGOUT })
-          Router.push('/login')
-        }
-      })
-}
-
-export const setLoading = (value) => ({
+export const setLoading = value => ({
   type: SET_LOADING,
   value
 })

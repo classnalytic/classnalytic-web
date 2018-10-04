@@ -20,7 +20,7 @@ router.post('/', (req, res, next) => {
       return res.json({ success: false, login: false, info: {} })
     }
 
-    req.logIn(user, async (err) => {
+    req.logIn(user, async err => {
       if (err) {
         return next(err)
       }

@@ -12,8 +12,14 @@ app
 
     if (process.env.NODE_ENV !== 'production') {
       const proxy = require('http-proxy-middleware')
-      server.use('/api/predict', proxy({ target: 'https://classnalytic.app', changeOrigin: true }))
-      server.use('/api', proxy({ target: 'http://localhost:5000', changeOrigin: true }))
+      server.use(
+        '/api/predict',
+        proxy({ target: 'https://classnalytic.app', changeOrigin: true })
+      )
+      server.use(
+        '/api',
+        proxy({ target: 'http://localhost:5000', changeOrigin: true })
+      )
     }
 
     server.get('/classroom/:id/detail', (req, res) => {
@@ -23,7 +29,13 @@ app
     })
 
     server.get('/classroom/:id/report', (req, res) => {
-      const actualPage = '/classroom/detail'
+      const actualPage = '/classroom/report'
+      const queryParams = { id: req.params.id }
+      app.render(req, res, actualPage, queryParams)
+    })
+
+    server.get('/classroom/:id/overview', (req, res) => {
+      const actualPage = '/classroom/overview'
       const queryParams = { id: req.params.id }
       app.render(req, res, actualPage, queryParams)
     })
@@ -32,12 +44,12 @@ app
       return handle(req, res)
     })
 
-    server.listen(3000, (err) => {
+    server.listen(3000, err => {
       if (err) throw err
       console.log('> Ready on http://localhost:3000')
     })
   })
-  .catch((ex) => {
+  .catch(ex => {
     console.error(ex.stack)
     process.exit(1)
   })

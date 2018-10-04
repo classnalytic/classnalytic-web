@@ -23,17 +23,17 @@ const reducer = (state = initialState, action) => {
 
 export default reducer
 
-export const setResult = (value) => ({
+export const setResult = value => ({
   type: SET_RESULT,
   value
 })
 
-export const setStudentId = (value) => ({
+export const setStudentId = value => ({
   type: SET_STUDENT_ID,
   value
 })
 
-export const setLoading = (value) => ({
+export const setLoading = value => ({
   type: SET_LOADING,
   value
 })

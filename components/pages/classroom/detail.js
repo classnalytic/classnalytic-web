@@ -105,7 +105,7 @@ const ClassroomDetail = ({ classroom }) => {
             <StudentTitle>Students</StudentTitle>
             <NameListBox>
               <StudentList>
-                {attendances.map((attendance) => {
+                {attendances.map(attendance => {
                   let user = attendance.user
                   return (
                     <StudentListChild key={attendance.id}>

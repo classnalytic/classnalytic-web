@@ -42,7 +42,7 @@ router.post('/save', async (req, res) => {
     year: 'numberic'
   })
 
-  data.forEach(async (student) => {
+  data.forEach(async student => {
     let user = await Users.find({ where: { studentId: student.name } })
 
     if (!user) {
@@ -75,7 +75,7 @@ router.post('/save', async (req, res) => {
       userId: user.id,
       classroomId: id,
       emotion: emotion
-    }).catch((err) => console.log(err))
+    }).catch(err => console.log(err))
   })
 
   return res.send({ id, data })
@@ -87,7 +87,7 @@ router.get('/:id', async (req, res) => {
   let classroom = await Classrooms.findById(id, {
     include: [Subjects, Rooms]
   })
-    .then(async (data) => {
+    .then(async data => {
       if (!data) {
         return { found: false }
       }
@@ -133,10 +133,10 @@ router.get('/:id', async (req, res) => {
       }
 
       if (emotions.length !== 0) {
-        let total = emotions.map((e) => parseInt(e.dataValues.count)).reduce((a, b) => a + b)
+        let total = emotions.map(e => parseInt(e.dataValues.count)).reduce((a, b) => a + b)
 
-        await emotions.forEach((emotion) => {
-          percent[emotion.emotion] = parseFloat((parseInt(emotion.dataValues.count) / total) * 100).toFixed(2)
+        await emotions.forEach(emotion => {
+          percent[emotion.emotion] = parseFloat(parseInt(emotion.dataValues.count) / total * 100).toFixed(2)
         })
       }
 

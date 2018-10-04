@@ -1,46 +1,46 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
-import Helmet from 'react-helmet';
-import dynamic from 'next/dynamic';
+import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux'
+import { compose } from 'recompose'
+import Helmet from 'react-helmet'
+import dynamic from 'next/dynamic'
 
-import Loader from '../components/commons/Loader';
-import Protected from '../components/commons/Protected';
+import Loader from '../components/commons/Loader'
+import Protected from '../components/commons/Protected'
 
-import { setClassrooms, setLoading } from '../redux/classroom';
+import { setClassrooms, setLoading } from '../redux/classroom'
 
 const Dashboard = dynamic(import('../components/pages/dashboard'), {
   loading: () => <Loader />
-});
+})
 
 const enhance = compose(
   connect(
     (state) => state,
     { setClassrooms, setLoading }
   )
-);
+)
 
 class DashboardPage extends Component {
-  static async getInitialProps({ store }) {
-    return { ...store };
+  static async getInitialProps ({ store }) {
+    return { ...store }
   }
 
-  componentDidMount() {
-    this.props.setClassrooms();
+  componentDidMount () {
+    this.props.setClassrooms()
   }
 
-  render() {
+  render () {
     const {
       classroom: { loading, classrooms },
       setLoading
-    } = this.props;
+    } = this.props
 
     return (
       <Fragment>
         {loading && <Loader />}
         <Helmet
           htmlAttributes={{ lang: 'th' }}
-          title="Classnalytic | Dashboard"
+          title='Classnalytic | Dashboard'
           meta={[
             { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0' },
             { property: 'og:title', content: 'Classnalytic' }
@@ -48,8 +48,8 @@ class DashboardPage extends Component {
         />
         <Protected>{!classrooms.success && <Dashboard classrooms={classrooms} setLoading={setLoading} />}</Protected>
       </Fragment>
-    );
+    )
   }
 }
 
-export default enhance(DashboardPage);
+export default enhance(DashboardPage)

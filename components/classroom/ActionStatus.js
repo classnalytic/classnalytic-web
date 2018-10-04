@@ -27,7 +27,7 @@ const ActionStatus = ({ actions }) => {
     <ActionContainer>
       <ActionTitle>Actions Logging</ActionTitle>
       <ActionList>
-        {actions.map((action) => {
+        {actions.map(action => {
           let time = new Date(action.time).toLocaleTimeString('en-US', {
             hour: '2-digit',
             minute: '2-digit',
