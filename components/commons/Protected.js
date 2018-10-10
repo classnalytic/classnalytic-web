@@ -1,10 +1,7 @@
 import { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'recompose'
 
 import { checkLogin } from '../../redux/user'
-
-const enhance = compose(connect(state => state, { checkLogin }))
 
 class Protected extends Component {
   static async getInitialProps ({ store }) {
@@ -20,4 +17,4 @@ class Protected extends Component {
   }
 }
 
-export default enhance(Protected)
+export default connect(state => state, { checkLogin })(Protected)

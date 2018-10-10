@@ -7,12 +7,12 @@ import Subtitle from '../../commons/Subtitle'
 // Custom Components
 import VideoBox from '../../student/NewVideoBox'
 
-const StudentNew = ({ setResult, setLoading }) => {
+const StudentNew = ({ setResult, setLoading, setStudentId }) => {
   return (
     <Container>
       <Title>Add Student</Title>
       <Subtitle>New family member</Subtitle>
-      <VideoBox setResult={setResult} setLoading={setLoading} />
+      <VideoBox setResult={setResult} setLoading={setLoading} setStudentId={setStudentId} />
       <CreditBox />
     </Container>
   )

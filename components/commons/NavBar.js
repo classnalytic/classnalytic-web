@@ -56,7 +56,7 @@ class NavBar extends Component {
 
   render () {
     const {
-      user: { login },
+      user: { login, info: { role } },
       doLogout
     } = this.props
 
@@ -78,9 +78,13 @@ class NavBar extends Component {
                   <Icon type='user' /> Students
                 </Menu>
               </Link>
-              <Menu>
-                <Icon type='setting' /> Settings
-              </Menu>
+              {role === 'admin' &&
+                <Link href='/setting'>
+                  <Menu>
+                    <Icon type='setting' /> Settings
+                  </Menu>
+                </Link>
+              }
               <LogoutButton onClick={() => doLogout()}>
                 <Icon type='logout' /> Logout
               </LogoutButton>

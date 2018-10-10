@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 import dataURLtoFile from '../../utils/dataURLtoFile'
+import capitalize from '../../utils/capitalize'
 import Webcam from 'react-webcam'
 import axios from 'axios'
 
@@ -19,6 +20,20 @@ const InfoTitle = styled(Title)`
   text-decoration: underline;
 `
 
+const WebcamWrapper = styled.div`
+`
+
+const BoundingBox = styled.div`
+  position: absolute;
+  width: ${props => props.right - props.left}px;
+  height: ${props => props.bottom - props.top}px;
+  margin-left: ${props => props.left}px;
+  margin-top: ${props => props.top}px;
+  border: 6px solid blue;
+  color: yellow;
+  font-size: 10px;
+`
+
 const videoConstraints = {
   width: 1280,
   height: 720
@@ -28,7 +43,8 @@ class Video extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      image: ''
+      image: '',
+      predict: []
     }
 
     this.setRef = this.setRef.bind(this)
@@ -56,6 +72,7 @@ class Video extends Component {
       }
     }
     let result = await axios.post('/api/predict', formData, config).then(result => result.data)
+    this.setState({ predict: result })
     if (result.length !== 0) {
       axios.post('/api/classroom/save', { data: JSON.stringify(result), id: this.props.id })
     }
@@ -73,17 +90,24 @@ class Video extends Component {
   }
 
   render () {
+    const { predict } = this.state
     return (
       <VideoBox>
         <InfoTitle>Video</InfoTitle>
-        <Webcam
-          videoConstraints={videoConstraints}
-          screenshotFormat='image/jpeg'
-          ref={this.setRef}
-          onUserMedia={this.ready}
-          width={'100%'}
-          audio={false}
-        />
+        <WebcamWrapper>
+          {predict.map(r => <BoundingBox key={r.name} left={r.face_location[0]} top={r.face_location[1]} right={r.face_location[2]} bottom={r.face_location[3]}>
+            {r.name} - {capitalize(Object.keys(r.emotions).reduce((a, b) => (r.emotions[a] > r.emotions[b] ? a : b)))}
+          </BoundingBox>)}
+          <Webcam
+            videoConstraints={videoConstraints}
+            screenshotFormat='image/jpeg'
+            ref={this.setRef}
+            onUserMedia={this.ready}
+            width='100%'
+            height='auto'
+            audio={false}
+          />
+        </WebcamWrapper>
       </VideoBox>
     )
   }

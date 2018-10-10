@@ -99,6 +99,7 @@ class Video extends Component {
   }
 
   handleChange (value) {
+    this.props.setStudentId(value)
     this.setState({ id: value })
   }
 

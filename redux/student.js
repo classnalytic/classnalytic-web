@@ -4,7 +4,7 @@ const SET_LOADING = 'SET_LOADING_STUDENT'
 
 const initialState = {
   loading: false,
-  studentId: '60070090',
+  studentId: '',
   result: []
 }
 

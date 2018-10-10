@@ -40,6 +40,12 @@ app
       app.render(req, res, actualPage, queryParams)
     })
 
+    server.get('/students/classroom/:id', (req, res) => {
+      const actualPage = '/students/classroom'
+      const queryParams = { id: req.params.id }
+      app.render(req, res, actualPage, queryParams)
+    })
+
     server.get('*', (req, res) => {
       return handle(req, res)
     })

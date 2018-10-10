@@ -84,6 +84,7 @@ const LoginPage = props => {
               value={values.username}
               error={errors.username && touched.username}
               message={errors.username}
+              size='large'
               type='text'
             />
             <TextInput
@@ -95,6 +96,7 @@ const LoginPage = props => {
               value={values.password}
               error={errors.password && touched.password}
               message={errors.password}
+              size='large'
               type='password'
             />
             <LoginButton type='button' onClick={handleSubmit} disabled={!isValid || isSubmitting}>

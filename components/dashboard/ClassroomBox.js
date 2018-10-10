@@ -37,7 +37,7 @@ const ConfigButton = styled(EnterButton)`
   }
 `
 
-export default ({ id, subject, room, time, setLoading }) => (
+export default ({ id, subject, room, time, setLoading, role }) => (
   <ClassroomBox>
     Subject : {subject}
     <br />
@@ -45,13 +45,21 @@ export default ({ id, subject, room, time, setLoading }) => (
     <br />
     Time : {time}
     <br />
-    <Link href={`/classroom/detail?id=${id}`} as={`/classroom/${id}/detail`}>
+    {role === 'student' &&
+    <Link href={`/students/classroom?id=${id}`} as={`/students/classroom/${id}`}>
       <EnterButton onClick={() => setLoading(true)}>
         <Icon type='login' /> Enter
       </EnterButton>
-    </Link>
+    </Link>}
+    {['teacher', 'teaching assistant', 'admin'].includes(role) &&
+    <Link href={`/classroom/overview?id=${id}`} as={`/classroom/${id}/overview`}>
+      <EnterButton onClick={() => setLoading(true)}>
+        <Icon type='login' /> Enter
+      </EnterButton>
+    </Link>}
+    {role === 'admin' &&
     <ConfigButton>
       <Icon type='setting' /> Config
-    </ConfigButton>
+    </ConfigButton>}
   </ClassroomBox>
 )

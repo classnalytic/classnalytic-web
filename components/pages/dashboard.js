@@ -30,6 +30,7 @@ export default ({ classrooms, setLoading }) => (
             room={classroom.classroom.room.name}
             time={date}
             setLoading={setLoading}
+            role={classroom.role}
           />
         )
       })}

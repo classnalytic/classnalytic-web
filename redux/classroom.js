@@ -33,7 +33,7 @@ export default reducer
 export const setClassrooms = () => {
   return dispatch =>
     axios
-      .get('/api/classroom')
+      .post('/api/classroom')
       .then(({ data }) => data)
       .then(classrooms => {
         if (!Array.isArray(classrooms)) {
@@ -47,7 +47,7 @@ export const setClassrooms = () => {
 export const getClassroomDetail = id => {
   return dispatch =>
     axios
-      .get(`/api/classroom/${id}`)
+      .post(`/api/classroom/${id}`)
       .then(({ data }) => data)
       .then(classroom => dispatch({ type: GET_CLASSROOM, classroom }))
       .catch(() => dispatch({ type: GET_CLASSROOM, classroom: {} }))
