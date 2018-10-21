@@ -13,11 +13,11 @@ const ReportGraph = ({ emotions }) => {
 
   return (
     <Fragment>
-
       {emotions.every((e) => e.y === 0) ? <NoDataBox>No Data<br /></NoDataBox>
         : <VictoryPie
           colorScale={colors}
           data={emotions}
+          labelRadius={90}
           sortKey='y'
           labels={(d) => d.y === 0 ? '' : `${d.x}: ${d.y.toFixed(2)}%`}
           style={{ parent: { maxWidth: 400, marginLeft: 'auto', marginRight: 'auto' }, labels: { fontSize: 14 } }}
@@ -25,7 +25,7 @@ const ReportGraph = ({ emotions }) => {
             duration: 500
           }}
         />}
-        Emotion Report
+      Emotion Report
     </Fragment>
   )
 }

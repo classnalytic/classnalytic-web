@@ -3,7 +3,7 @@ import Icon from 'antd/lib/icon'
 import TimePicker from 'antd/lib/time-picker'
 import moment from 'moment'
 
-export default ({ placeholder, icon, name, label, value, size, type, onChange, onBlur, error, message, style, format }) => {
+export default ({ placeholder, icon, name, label, value, size, type, onChange, onBlur, error, message, style, format, hourStep, minuteStep, secondStep }) => {
   const formItemLayout = {
     labelCol: {
       xs: { span: 24 },
@@ -22,16 +22,20 @@ export default ({ placeholder, icon, name, label, value, size, type, onChange, o
         type={type}
         size={size}
         name={name}
-        defaultValue={moment(format)}
+        defaultValue={moment()}
         value={moment(value)}
         prefix={<Icon type={icon} style={{ color: 'rgba(0,0,0,.25)' }} />}
         placeholder={placeholder}
         format={format}
         onChange={(time) => {
+          time = time ? time.toISOString() : moment().second(0)
           onChange(name, time)
         }}
         onBlur={onBlur}
         style={style}
+        hourStep={hourStep}
+        minuteStep={minuteStep}
+        secondStep={secondStep}
       />
     </FormItem>
   )

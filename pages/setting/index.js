@@ -28,6 +28,10 @@ const RoomList = dynamic(import('../../components/pages/setting/room/list'), {
   loading: () => <Loader />
 })
 
+const ModelTrain = dynamic(import('../../components/pages/setting/train'), {
+  loading: () => <Loader />
+})
+
 const NewButton = styled(Button)`
   margin-top: 0.7em;
   box-shadow: 0 2px 10px 5px rgba(0, 0, 0, 0.04);
@@ -56,7 +60,6 @@ class SettingIndexPage extends Component {
   render () {
     return (
       <Fragment>
-        {/* {loading && <Loader />} */}
         <Helmet
           htmlAttributes={{ lang: 'th' }}
           title='Classnalytic | Classroom List'
@@ -78,6 +81,9 @@ class SettingIndexPage extends Component {
               </TabPane>
               <TabPane tab='Subjects' key='3'>
                 <Link href='/setting/subject/new'><NewButton>New Subject</NewButton></Link><br /><br /><SubjectList />
+              </TabPane>
+              <TabPane tab='Model' key='4'>
+                <ModelTrain />
               </TabPane>
             </Tabs>
           </Wrapper>

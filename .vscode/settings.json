@@ -1,0 +1,5 @@
+{
+    "standard.autoFixOnSave": true,
+    "javascript.format.insertSpaceAfterConstructor": true,
+    "typescript.format.insertSpaceAfterConstructor": true
+}

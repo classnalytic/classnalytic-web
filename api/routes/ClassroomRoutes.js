@@ -51,6 +51,10 @@ router.post('/save', async (req, res) => {
   })
 
   data.forEach(async student => {
+    if (student.name === 'Unknown') {
+      return
+    }
+
     let user = await Users.find({ where: { studentId: student.name } })
 
     if (!user) {
@@ -75,6 +79,7 @@ router.post('/save', async (req, res) => {
 
     if (!attendance) {
       Attendance.create({
+        id: uuid(),
         userId: user.id,
         classroomId: id
       })
@@ -87,12 +92,14 @@ router.post('/save', async (req, res) => {
       emotion: emotion
     }).catch(err => console.log(err))
 
-    Actions.create({
-      id: uuid(),
-      userId: user.id,
-      classroomId: id,
-      action: action
-    }).catch(err => console.log(err))
+    if (action) {
+      Actions.create({
+        id: uuid(),
+        userId: user.id,
+        classroomId: id,
+        action: action
+      }).catch(err => console.log(err))
+    }
   })
 
   return res.send({ id, data })
@@ -116,7 +123,9 @@ router.post('/create', async (req, res) => {
   let startTime = req.body.startTime
   let endTime = req.body.endTime
 
-  let classroomId = await Classrooms.create({ id: uuid(), roomId, subjectId, startTime, endTime }).then(r => r.get('id')).catch(e => console.log(e))
+  let classroomId = await Classrooms.create({ id: uuid(), roomId, subjectId, startTime, endTime })
+    .then(r => r.get('id'))
+    .catch(e => console.log(e))
 
   await Enrolls.create({ id: uuid(), userId: instructorId, classroomId, role: 'admin' }).catch(e => console.log(e))
 
@@ -180,7 +189,7 @@ router.post('/:id', async (req, res) => {
         let total = emotions.map(e => parseInt(e.dataValues.count)).reduce((a, b) => a + b)
 
         await emotions.forEach(emotion => {
-          percent[emotion.emotion] = parseFloat(parseInt(emotion.dataValues.count) / total * 100).toFixed(2)
+          percent[emotion.emotion] = parseFloat((parseInt(emotion.dataValues.count) / total) * 100).toFixed(2)
         })
       }
 
@@ -249,7 +258,7 @@ router.post('/:id/report', async (req, res) => {
     let total = emotions.map(e => parseInt(e.dataValues.count)).reduce((a, b) => a + b)
 
     await emotions.forEach(emotion => {
-      percent[emotion.emotion] = parseFloat(parseInt(emotion.dataValues.count) / total * 100).toFixed(2)
+      percent[emotion.emotion] = parseFloat((parseInt(emotion.dataValues.count) / total) * 100).toFixed(2)
     })
   }
 

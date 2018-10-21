@@ -34,7 +34,7 @@ const CreateButton = styled(Button)`
 
 const enhance = compose(
   withFormik({
-    mapPropsToValues: () => {},
+    mapPropsToValues: () => { },
     validationSchema: Yup.object().shape({
       room: Yup.string().required('Room is required'),
       instructor: Yup.string().required('Instructor is required'),
@@ -72,7 +72,10 @@ class CreateClassroom extends Component {
   async fetch () {
     let result = await axios.post('/api/classroom/form').then(r => r.data)
 
-    result.instructors = result.instructors.map(instructor => ({ ...instructor, value: `${instructor.firstname} ${instructor.lastname}` }))
+    result.instructors = result.instructors.map(instructor => ({
+      ...instructor,
+      value: `${instructor.firstname} ${instructor.lastname}`
+    }))
     result.subjects = result.subjects.map(subject => ({ ...subject, value: subject.name }))
     result.rooms = result.rooms.map(room => ({ ...room, value: room.name }))
 
@@ -80,17 +83,12 @@ class CreateClassroom extends Component {
   }
 
   render () {
-    const {
-      values,
-      touched,
-      errors,
-      isSubmitting,
-      handleSubmit,
-      setFieldValue,
-      isValid
-    } = this.props
+    const { values, touched, errors, isSubmitting, handleSubmit, setFieldValue, isValid } = this.props
 
-    const { result: { rooms, instructors, subjects }, loading } = this.state
+    const {
+      result: { rooms, instructors, subjects },
+      loading
+    } = this.state
 
     const keyEnterPress = e => {
       if (e.keyCode === 13 && e.shiftKey === false) {
@@ -109,7 +107,6 @@ class CreateClassroom extends Component {
             <Form onKeyPress={e => keyEnterPress(e)}>
               <SelectInput
                 onChange={setFieldValue}
-                // onBlur={handleBlur}
                 placeholder='Subject'
                 name='subject'
                 value={values.subject}
@@ -121,7 +118,6 @@ class CreateClassroom extends Component {
               />
               <SelectInput
                 onChange={setFieldValue}
-                // onBlur={handleBlur}
                 placeholder='Room'
                 name='room'
                 value={values.room}
@@ -133,7 +129,6 @@ class CreateClassroom extends Component {
               />
               <SelectInput
                 onChange={setFieldValue}
-                // onBlur={handleBlur}
                 placeholder='Instructor'
                 name='instructor'
                 value={values.instructor}
@@ -145,7 +140,6 @@ class CreateClassroom extends Component {
               />
               <TimeInput
                 onChange={setFieldValue}
-                // onBlur={handleBlur}
                 placeholder='Start Time'
                 name='startTime'
                 value={values.startTime}
@@ -154,10 +148,11 @@ class CreateClassroom extends Component {
                 format={'HH:mm:ss'}
                 label='Start Time'
                 size='large'
+                minuteStep={10}
+                secondStep={30}
               />
               <TimeInput
                 onChange={setFieldValue}
-                // onBlur={handleBlur}
                 placeholder='End Time'
                 name='endTime'
                 value={values.endTime}
@@ -166,6 +161,8 @@ class CreateClassroom extends Component {
                 format={'HH:mm:ss'}
                 label='End Time'
                 size='large'
+                minuteStep={10}
+                secondStep={30}
               />
               <CreateButton type='button' onClick={handleSubmit} disabled={!isValid || isSubmitting}>
                 Create

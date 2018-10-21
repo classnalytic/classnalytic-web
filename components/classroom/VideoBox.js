@@ -20,8 +20,7 @@ const InfoTitle = styled(Title)`
   text-decoration: underline;
 `
 
-const WebcamWrapper = styled.div`
-`
+const WebcamWrapper = styled.div``
 
 const BoundingBox = styled.div`
   position: absolute;
@@ -95,9 +94,17 @@ class Video extends Component {
       <VideoBox>
         <InfoTitle>Video</InfoTitle>
         <WebcamWrapper>
-          {predict.map(r => <BoundingBox key={r.name} left={r.face_location[0]} top={r.face_location[1]} right={r.face_location[2]} bottom={r.face_location[3]}>
-            {r.name} - {capitalize(Object.keys(r.emotions).reduce((a, b) => (r.emotions[a] > r.emotions[b] ? a : b)))}
-          </BoundingBox>)}
+          {predict.map(r => (
+            <BoundingBox
+              key={r.id}
+              left={r.face_location[0]}
+              top={r.face_location[1]}
+              right={r.face_location[2]}
+              bottom={r.face_location[3]}
+            >
+              {r.name} - {capitalize(Object.keys(r.emotions).reduce((a, b) => (r.emotions[a] > r.emotions[b] ? a : b)))} {r.action && `- ${r.action}`}
+            </BoundingBox>
+          ))}
           <Webcam
             videoConstraints={videoConstraints}
             screenshotFormat='image/jpeg'
