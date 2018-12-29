@@ -26,11 +26,12 @@ const TrainButton = styled(Button)`
 
 const ReloadButton = styled(Button)`
   margin-top: 0.7em;
+  margin-left: 0.5em;
   box-shadow: 0 2px 10px 5px rgba(0, 0, 0, 0.04);
   border: 0;
   padding: 0.5em 1em;
   color: #fff;
-  background-color: #00c851;
+  background-color: #ffbb33;
   outline: none;
   cursor: pointer;
 
@@ -40,7 +41,7 @@ const ReloadButton = styled(Button)`
   }
 
   :hover {
-    background-color: #007e33;
+    background-color: #ff8800;
   }
 `
 
@@ -108,12 +109,14 @@ class ModelTrain extends Component {
   render () {
     const { ready, state } = this.state
 
-    return (<Fragment>
-      <TrainButton disabled={!ready} onClick={this.submitTrain}>Train</TrainButton>{' '}
-      <ReloadButton disabled={!ready} onClick={this.reloadModel}>Reload</ReloadButton>
-      <br /><br />
-      Status : {state === 'RUNNING' && 'Training...'} {(state !== 'RUNNING' && state !== 'RELOADING') && 'Ready to work!'} {state === 'RELOADING' && 'Reloading Model!'}
-    </Fragment>)
+    return (
+      <Fragment>
+        <TrainButton disabled={!ready} onClick={this.submitTrain}>Train</TrainButton>{' '}
+        <ReloadButton disabled={!ready} onClick={this.reloadModel}>Reload</ReloadButton>
+        <br /><br />
+        Status : {state === 'RUNNING' && 'Training...'} {(state !== 'RUNNING' && state !== 'RELOADING') && 'Ready to work!'} {state === 'RELOADING' && 'Reloading Model!'}
+      </Fragment>
+    )
   }
 }
 

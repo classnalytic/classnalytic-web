@@ -102,7 +102,7 @@ class Video extends Component {
               right={r.face_location[2]}
               bottom={r.face_location[3]}
             >
-              {r.name} - {capitalize(Object.keys(r.emotions).reduce((a, b) => (r.emotions[a] > r.emotions[b] ? a : b)))} {r.action && `- ${r.action}`}
+              {r.name} - {capitalize(Object.keys(r.emotions).reduce((a, b) => (r.emotions[a] > r.emotions[b] ? a : b)))} {r.action !== 'null' && `- ${r.action}`}
             </BoundingBox>
           ))}
           <Webcam

@@ -92,7 +92,7 @@ router.post('/save', async (req, res) => {
       emotion: emotion
     }).catch(err => console.log(err))
 
-    if (action) {
+    if (action !== 'null') {
       Actions.create({
         id: uuid(),
         userId: user.id,
