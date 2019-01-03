@@ -7,6 +7,8 @@ const router = express.Router()
 
 const AuthenticationMiddleware = require('../middlewares/AuthenticationMiddlewares')
 
+const { JWT_SECRET } = require('../config')
+
 router.get('/me', AuthenticationMiddleware, (req, res) => {
   jwt.verify(req.token, 'top_secret', (err, authorizedData) => {
     if (err) {
@@ -42,7 +44,7 @@ router.post('/', (req, res, next) => {
 
       const body = { ...user }
       // Sign the JWT token and populate the payload with the user email and id
-      const token = jwt.sign({ user: body }, 'top_secret', { expiresIn: '1h' })
+      const token = jwt.sign({ user: body }, JWT_SECRET, { expiresIn: '1h' })
 
       return res.json({
         success: true,

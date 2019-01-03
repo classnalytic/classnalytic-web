@@ -3,7 +3,10 @@ const bcrypt = require('bcrypt')
 const LocalStrategy = require('passport-local').Strategy
 const JWTstrategy = require('passport-jwt').Strategy
 const ExtractJWT = require('passport-jwt').ExtractJwt
+
 const { Users } = require('./sequelize')
+
+const { JWT_SECRET } = require('../config')
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
@@ -32,7 +35,7 @@ passport.use(
   new JWTstrategy(
     {
       // secret we used to sign our JWT
-      secretOrKey: 'top_secret',
+      secretOrKey: JWT_SECRET,
       // we expect the user to send the token as a query paramater with the name 'secret_token'
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken()
     },
