@@ -1,13 +1,28 @@
 const express = require('express')
 const passport = require('passport')
+
+const jwt = require('jsonwebtoken')
+
 const router = express.Router()
 
-router.get('/', (req, res) => {
-  if (req.isAuthenticated()) {
-    return res.json({ login: true })
-  } else {
-    return res.json({ login: false })
-  }
+const AuthenticationMiddleware = require('../middlewares/AuthenticationMiddlewares')
+
+router.get('/me', AuthenticationMiddleware, (req, res) => {
+  jwt.verify(req.token, 'top_secret', (err, authorizedData) => {
+    if (err) {
+      // If error send Forbidden (403)
+      console.log('ERROR: Could not connect to the protected route')
+      console.log(err)
+      res.sendStatus(403)
+    } else {
+      // If token is successfully verified, we can send the autorized data
+      res.json({
+        message: 'Successful log in',
+        authorizedData
+      })
+      console.log('SUCCESS: Connected to protected route')
+    }
+  })
 })
 
 router.post('/', (req, res, next) => {
@@ -25,9 +40,14 @@ router.post('/', (req, res, next) => {
         return next(err)
       }
 
+      const body = { ...user }
+      // Sign the JWT token and populate the payload with the user email and id
+      const token = jwt.sign({ user: body }, 'top_secret', { expiresIn: '1h' })
+
       return res.json({
         success: true,
         login: true,
+        token,
         info: {
           ...user
         }
