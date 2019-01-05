@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 
 import { withFormik } from 'formik'
@@ -35,8 +35,12 @@ const enhance = compose(
   withFormik({
     mapPropsToValues: () => {},
     validationSchema: Yup.object().shape({
-      username: Yup.string().min(4, 'Username must be at least 4 characters').required('Username is required!'),
-      password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required!')
+      username: Yup.string()
+        .min(4, 'Username must be at least 4 characters')
+        .required('Username is required!'),
+      password: Yup.string()
+        .min(6, 'Password must be at least 6 characters')
+        .required('Password is required!')
     }),
     handleSubmit: (values, { setSubmitting, props }) => {
       props.setLoading(true)
@@ -99,7 +103,11 @@ const LoginPage = props => {
               size='large'
               type='password'
             />
-            <LoginButton type='button' onClick={handleSubmit} disabled={!isValid || isSubmitting}>
+            <LoginButton
+              type='button'
+              onClick={handleSubmit}
+              disabled={!isValid || isSubmitting}
+            >
               Login
             </LoginButton>
           </Form>

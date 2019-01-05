@@ -9,32 +9,53 @@ import { doLogout } from '../../redux/user'
 
 const Container = styled.div`
   position: absolute;
+  display: flex;
   top: 0;
   width: 100%;
-  padding: 2em;
-  z-index: 999;
+  padding: 1.2em 1.5em;
+  z-index: 32;
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+`
+
+const MenuHeader = styled.div`
+  display: flex;
+  align-items: center;
+  box-align: center;
 `
 
 const Title = styled.p`
-  margin-bottom: 0 !important;
-  margin-right: 1em;
+  display: flex;
   font-size: 1.2em;
   font-weight: 500;
   color: #000;
   cursor: pointer;
+  margin: 0;
+  padding: 0;
 `
 
-const MenuWrapper = styled.ul`
+const MenuWrapper = styled.div`
   display: flex;
+  flex: 1 1 auto;
+  justify-content: space-between;
   list-style: none;
+`
+
+const MenuGroup = styled.ul`
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 `
 
 const Menu = styled.li`
   display: list-item;
-  margin-left: 1.5em;
+  margin-left: 1.4em;
   font-size: 1.2em;
   font-weight: 300;
   color: #000;
+  padding-inline-start: 0;
   cursor: pointer;
 `
 
@@ -44,7 +65,7 @@ const LogoutButton = styled(Menu)`
 
 const enhance = compose(
   connect(
-    (state) => state,
+    state => state,
     { doLogout }
   )
 )
@@ -56,53 +77,69 @@ class NavBar extends Component {
 
   render () {
     const {
-      user: { login, info: { role } },
+      user: {
+        login,
+        info: { role }
+      },
       doLogout
     } = this.props
 
     return (
       <Container>
-        <MenuWrapper>
+        <MenuHeader>
           <Link href='/'>
             <Title>Classnalytic</Title>
           </Link>
-          {login ? (
-            <Fragment>
-              <Link href='/dashboard'>
-                <Menu>
-                  <Icon type='dashboard' /> Dashboard
-                </Menu>
-              </Link>
-              <Link href='/students'>
-                <Menu>
-                  <Icon type='user' /> Students
-                </Menu>
-              </Link>
-              {role === 'admin' &&
-                <Link href='/setting'>
+        </MenuHeader>
+        <MenuWrapper>
+          <MenuGroup>
+            {login ? (
+              <Fragment>
+                <Link href='/dashboard'>
                   <Menu>
-                    <Icon type='setting' /> Settings
+                    <Icon type='dashboard' /> Dashboard
                   </Menu>
                 </Link>
-              }
-              <LogoutButton onClick={() => doLogout()}>
-                <Icon type='logout' /> Logout
-              </LogoutButton>
-            </Fragment>
-          ) : (
-            <Fragment>
-              <Link href='/'>
-                <Menu>
-                  <Icon type='home' /> Home
-                </Menu>
-              </Link>
-              <Link href='/login'>
-                <Menu>
-                  <Icon type='login' /> Login
-                </Menu>
-              </Link>
-            </Fragment>
-          )}
+                <Link href='/students'>
+                  <Menu>
+                    <Icon type='user' /> Students
+                  </Menu>
+                </Link>
+                {role === 'admin' && (
+                  <Link href='/setting'>
+                    <Menu>
+                      <Icon type='setting' /> Settings
+                    </Menu>
+                  </Link>
+                )}
+              </Fragment>
+            ) : (
+              <>
+                <Link href='/'>
+                  <Menu>
+                    <Icon type='home' /> Home
+                  </Menu>
+                </Link>
+              </>
+            )}
+          </MenuGroup>
+          <MenuGroup>
+            {login ? (
+              <>
+                <LogoutButton onClick={() => doLogout()}>
+                  <Icon type='logout' /> Logout
+                </LogoutButton>
+              </>
+            ) : (
+              <>
+                <Link href='/login'>
+                  <Menu>
+                    <Icon type='login' /> Login
+                  </Menu>
+                </Link>
+              </>
+            )}
+          </MenuGroup>
         </MenuWrapper>
       </Container>
     )
