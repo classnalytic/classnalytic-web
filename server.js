@@ -18,7 +18,11 @@ app
       )
       server.use(
         '/api',
-        proxy({ target: 'http://localhost:5000', changeOrigin: true })
+        proxy({
+          target: 'https://localhost:5000',
+          changeOrigin: true,
+          secure: false
+        })
       )
     }
 
@@ -50,10 +54,21 @@ app
       return handle(req, res)
     })
 
-    server.listen(3000, err => {
-      if (err) throw err
-      console.log('> Ready on http://localhost:3000')
-    })
+    if (process.env.NODE_ENV === 'production') {
+      server.listen(3000, err => {
+        if (err) throw err
+        console.log('> Ready on http://localhost:3000')
+      })
+    } else {
+      const { createServer } = require('https')
+      const path = require('path')
+      const fs = require('fs')
+      const ssl = {
+        key: fs.readFileSync(path.resolve('cert/server.key')),
+        cert: fs.readFileSync(path.resolve('cert/server.crt'))
+      }
+      createServer(ssl, server).listen(3000)
+    }
   })
   .catch(ex => {
     console.error(ex.stack)

@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import Link from 'next/link'
 import Icon from 'antd/lib/icon'
 import { connect } from 'react-redux'
@@ -21,7 +22,6 @@ const Container = styled.div`
 const MenuHeader = styled.div`
   display: flex;
   align-items: center;
-  box-align: center;
 `
 
 const Title = styled.p`
@@ -144,6 +144,13 @@ class NavBar extends Component {
       </Container>
     )
   }
+}
+
+NavBar.propTypes = {
+  user: PropTypes.shape({
+    login: PropTypes.bool
+  }),
+  doLogout: PropTypes.func
 }
 
 export default enhance(NavBar)

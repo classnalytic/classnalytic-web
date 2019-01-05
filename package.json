@@ -2,7 +2,7 @@
   "name": "classnalytic-frontend",
   "version": "1.0.0",
   "scripts": {
-    "dev": "nodemon server.js",
+    "dev": "NODE_ENV=development nodemon server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "test": "standard --verbose | snazzy",
@@ -23,6 +23,7 @@
     "next": "^7.0.0",
     "next-images": "^0.10.6",
     "next-redux-wrapper": "^2.0.0",
+    "prop-types": "^15.6.2",
     "qrcode.react": "^0.8.0",
     "raw-loader": "^0.5.1",
     "react": "^16.4.2",

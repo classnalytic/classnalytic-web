@@ -6,6 +6,7 @@ import * as Yup from 'yup'
 import { compose } from 'recompose'
 
 import Form from 'antd/lib/form'
+
 import Container from '../commons/Container'
 import Card from '../commons/Card'
 import TextInput from '../commons/TextInput'

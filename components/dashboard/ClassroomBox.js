@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import styled from 'styled-components'
 import Icon from 'antd/lib/icon'
 import Box from '../commons/Box'
@@ -37,7 +39,7 @@ const ConfigButton = styled(EnterButton)`
   }
 `
 
-export default ({ id, subject, room, time, setLoading, role }) => (
+const ClassroomContainer = ({ id, subject, room, time, setLoading, role }) => (
   <ClassroomBox>
     Subject : {subject}
     <br />
@@ -45,21 +47,41 @@ export default ({ id, subject, room, time, setLoading, role }) => (
     <br />
     Time : {time}
     <br />
-    {role === 'student' &&
-    <Link href={`/students/classroom?id=${id}`} as={`/students/classroom/${id}`}>
-      <EnterButton onClick={() => setLoading(true)}>
-        <Icon type='login' /> Enter
-      </EnterButton>
-    </Link>}
-    {['teacher', 'teaching assistant', 'admin'].includes(role) &&
-    <Link href={`/classroom/overview?id=${id}`} as={`/classroom/${id}/overview`}>
-      <EnterButton onClick={() => setLoading(true)}>
-        <Icon type='login' /> Enter
-      </EnterButton>
-    </Link>}
-    {role === 'admin' &&
-    <ConfigButton>
-      <Icon type='setting' /> Config
-    </ConfigButton>}
+    {role === 'student' && (
+      <Link
+        href={`/students/classroom?id=${id}`}
+        as={`/students/classroom/${id}`}
+      >
+        <EnterButton onClick={() => setLoading(true)}>
+          <Icon type='login' /> Enter
+        </EnterButton>
+      </Link>
+    )}
+    {['teacher', 'teaching assistant', 'admin'].includes(role) && (
+      <Link
+        href={`/classroom/overview?id=${id}`}
+        as={`/classroom/${id}/overview`}
+      >
+        <EnterButton onClick={() => setLoading(true)}>
+          <Icon type='login' /> Enter
+        </EnterButton>
+      </Link>
+    )}
+    {role === 'admin' && (
+      <ConfigButton>
+        <Icon type='setting' /> Config
+      </ConfigButton>
+    )}
   </ClassroomBox>
 )
+
+ClassroomContainer.propTypes = {
+  id: PropTypes.string.isRequired,
+  subject: PropTypes.string.isRequired,
+  room: PropTypes.string.isRequired,
+  time: PropTypes.string.isRequired,
+  setLoading: PropTypes.func.isRequired,
+  role: PropTypes.string.isRequired
+}
+
+export default ClassroomContainer

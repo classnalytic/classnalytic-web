@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { checkLogin } from '../../redux/user'
@@ -9,12 +9,19 @@ class Protected extends Component {
   }
 
   render () {
-    const { children, user: { login }, checkLogin } = this.props
+    const {
+      children,
+      user: { login },
+      checkLogin
+    } = this.props
 
     checkLogin()
 
-    return login ? children : <Fragment />
+    return login ? children : <></>
   }
 }
 
-export default connect(state => state, { checkLogin })(Protected)
+export default connect(
+  state => state,
+  { checkLogin }
+)(Protected)
