@@ -27,7 +27,7 @@ const MenuHeader = styled.div`
 const Title = styled.p`
   display: flex;
   font-size: 1.2em;
-  font-weight: 500;
+  font-weight: 700;
   color: #000;
   cursor: pointer;
   margin: 0;
@@ -38,7 +38,6 @@ const MenuWrapper = styled.div`
   display: flex;
   flex: 1 1 auto;
   justify-content: space-between;
-  list-style: none;
 `
 
 const MenuGroup = styled.ul`
@@ -57,6 +56,10 @@ const Menu = styled.li`
   color: #000;
   padding-inline-start: 0;
   cursor: pointer;
+`
+
+const MenuUserName = styled(Menu)`
+  cursor: text;
 `
 
 const LogoutButton = styled(Menu)`
@@ -79,7 +82,7 @@ class NavBar extends Component {
     const {
       user: {
         login,
-        info: { role }
+        info: { role, firstname, lastname }
       },
       doLogout
     } = this.props
@@ -126,6 +129,9 @@ class NavBar extends Component {
           <MenuGroup>
             {login ? (
               <>
+                <MenuUserName>
+                  {firstname} {lastname}
+                </MenuUserName>
                 <LogoutButton onClick={() => doLogout()}>
                   <Icon type='logout' /> Logout
                 </LogoutButton>

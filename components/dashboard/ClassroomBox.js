@@ -8,11 +8,56 @@ import Button from '../commons/Button'
 import Link from 'next/link'
 
 const ClassroomBox = styled(Box)`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* height: 300px; */
   background-color: #ffffff;
   box-shadow: 0 2px 10px 5px rgba(0, 0, 0, 0.04);
   padding: 1em 2em;
-  margin-bottom: 2em;
   color: #000;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 60%;
+  }
+
+  h1 {
+    font-weight: 300;
+    margin-bottom: 0em;
+  }
+
+  h2 {
+    font-size: 1.2em;
+    font-weight: 100;
+  }
+`
+
+const LiveTag = styled.div`
+  border-radius: 5px;
+  background-color: #ff0000;
+  color: #fff;
+  position: absolute;
+  padding: 0.5em;
+  top: 1em;
+  right: 1em;
+
+  div {
+    border-radius: 50%;
+    width: 0.9em;
+    height: 0.9em;
+    background: #fff;
+    display: inline-block;
+  }
+`
+
+const ButtonWrapper = styled.div`
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
 `
 
 const EnterButton = styled(Button)`
@@ -39,39 +84,54 @@ const ConfigButton = styled(EnterButton)`
   }
 `
 
-const ClassroomContainer = ({ id, subject, room, time, setLoading, role }) => (
+const ClassroomContainer = ({
+  id,
+  subject,
+  room,
+  time,
+  setLoading,
+  role,
+  live
+}) => (
   <ClassroomBox>
-    Subject : {subject}
-    <br />
-    Room : {room}
-    <br />
-    Time : {time}
-    <br />
-    {role === 'student' && (
-      <Link
-        href={`/students/classroom?id=${id}`}
-        as={`/students/classroom/${id}`}
-      >
-        <EnterButton onClick={() => setLoading(true)}>
-          <Icon type='login' /> Enter
-        </EnterButton>
-      </Link>
+    {live && (
+      <LiveTag>
+        <div /> Live
+      </LiveTag>
     )}
-    {['teacher', 'teaching assistant', 'admin'].includes(role) && (
-      <Link
-        href={`/classroom/overview?id=${id}`}
-        as={`/classroom/${id}/overview`}
-      >
-        <EnterButton onClick={() => setLoading(true)}>
-          <Icon type='login' /> Enter
-        </EnterButton>
-      </Link>
-    )}
-    {role === 'admin' && (
-      <ConfigButton>
-        <Icon type='setting' /> Config
-      </ConfigButton>
-    )}
+    <div>
+      <h1>{subject}</h1>
+      <h2>
+        {time} at {room}
+      </h2>
+    </div>
+    <ButtonWrapper>
+      {role === 'student' && (
+        <Link
+          href={`/students/classroom?id=${id}`}
+          as={`/students/classroom/${id}`}
+        >
+          <EnterButton onClick={() => setLoading(true)}>
+            <Icon type='login' /> Enter
+          </EnterButton>
+        </Link>
+      )}
+      {['teacher', 'teaching assistant', 'admin'].includes(role) && (
+        <Link
+          href={`/classroom/overview?id=${id}`}
+          as={`/classroom/${id}/overview`}
+        >
+          <EnterButton onClick={() => setLoading(true)}>
+            <Icon type='login' /> Enter
+          </EnterButton>
+        </Link>
+      )}
+      {role === 'admin' && (
+        <ConfigButton>
+          <Icon type='setting' /> Config
+        </ConfigButton>
+      )}
+    </ButtonWrapper>
   </ClassroomBox>
 )
 
@@ -81,7 +141,8 @@ ClassroomContainer.propTypes = {
   room: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,
   setLoading: PropTypes.func.isRequired,
-  role: PropTypes.string.isRequired
+  role: PropTypes.string.isRequired,
+  live: PropTypes.bool.isRequired
 }
 
 export default ClassroomContainer

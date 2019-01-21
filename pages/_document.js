@@ -1,3 +1,4 @@
+import React from 'react'
 import Document, { Head, Main, NextScript } from 'next/document'
 import styles from 'styles/style.less'
 import { ServerStyleSheet } from 'styled-components'
@@ -7,7 +8,8 @@ export default class MyDocument extends Document {
   static async getInitialProps ({ renderPage }) {
     const sheet = new ServerStyleSheet()
     const page = renderPage(App => props =>
-      sheet.collectStyles(<App {...props} />))
+      sheet.collectStyles(<App {...props} />)
+    )
     const styleTags = sheet.getStyleElement()
     return { ...page, styleTags, helmet: Helmet.renderStatic() }
   }
@@ -49,7 +51,7 @@ export default class MyDocument extends Document {
         <Head>
           {this.helmetJsx}
           <link
-            href='https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700'
+            href='https://fonts.googleapis.com/css?family=Sarabun:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i&amp;subset=thai'
             rel='stylesheet'
           />
           {this.props.styleTags}

@@ -10,7 +10,6 @@ import { Tabs } from 'antd'
 import Loader from '../../components/commons/Loader'
 import Button from '../../components/commons/Button'
 import Title from '../../components/commons/Title'
-import Subtitle from '../../components/commons/Subtitle'
 import Container from '../../components/commons/Container'
 import Protected from '../../components/commons/Protected'
 
@@ -18,12 +17,18 @@ import { checkLogin } from '../../redux/user'
 
 const TabPane = Tabs.TabPane
 
-const ClassroomList = dynamic(import('../../components/pages/setting/classroom/list'), {
-  loading: () => <Loader />
-})
-const SubjectList = dynamic(import('../../components/pages/setting/subject/list'), {
-  loading: () => <Loader />
-})
+const ClassroomList = dynamic(
+  import('../../components/pages/setting/classroom/list'),
+  {
+    loading: () => <Loader />
+  }
+)
+const SubjectList = dynamic(
+  import('../../components/pages/setting/subject/list'),
+  {
+    loading: () => <Loader />
+  }
+)
 const RoomList = dynamic(import('../../components/pages/setting/room/list'), {
   loading: () => <Loader />
 })
@@ -64,23 +69,41 @@ class SettingIndexPage extends Component {
           htmlAttributes={{ lang: 'th' }}
           title='Classnalytic | Classroom List'
           meta={[
-            { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0' },
+            {
+              name: 'viewport',
+              content:
+                'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0'
+            },
             { property: 'og:title', content: 'Classnalytic' }
           ]}
         />
         <Protected>
           <Wrapper>
             <Title>Settings</Title>
-            <Subtitle>Customize whatever you want</Subtitle>
-            <Tabs defaultActiveKey='1' >
+            <Tabs defaultActiveKey='1'>
               <TabPane tab='Classrooms' key='1'>
-                <Link href='/setting/classroom/new'><NewButton>New Classroom</NewButton></Link><br /><br /><ClassroomList />
+                <Link href='/setting/classroom/new'>
+                  <NewButton>New Classroom</NewButton>
+                </Link>
+                <br />
+                <br />
+                <ClassroomList />
               </TabPane>
               <TabPane tab='Rooms' key='2'>
-                <Link href='/setting/room/new'><NewButton>New Room</NewButton></Link><br /><br /><RoomList />
+                <Link href='/setting/room/new'>
+                  <NewButton>New Room</NewButton>
+                </Link>
+                <br />
+                <br />
+                <RoomList />
               </TabPane>
               <TabPane tab='Subjects' key='3'>
-                <Link href='/setting/subject/new'><NewButton>New Subject</NewButton></Link><br /><br /><SubjectList />
+                <Link href='/setting/subject/new'>
+                  <NewButton>New Subject</NewButton>
+                </Link>
+                <br />
+                <br />
+                <SubjectList />
               </TabPane>
               <TabPane tab='Model' key='4'>
                 <ModelTrain />
@@ -93,4 +116,7 @@ class SettingIndexPage extends Component {
   }
 }
 
-export default connect(state => state, { checkLogin })(SettingIndexPage)
+export default connect(
+  state => state,
+  { checkLogin }
+)(SettingIndexPage)

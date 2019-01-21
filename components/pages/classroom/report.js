@@ -110,19 +110,29 @@ class ClassroomReport extends Component {
 
   onDateChange (date, dateString) {
     this.setState({ date })
-    if (dateString !== '') { this.getReport(date) }
+    if (dateString !== '') {
+      this.getReport(date)
+    }
   }
 
   async getReport (date) {
     const { id } = this.state
-    let report = await axios.post(`/api/classroom/${id}/report`, { date: date.format('YYYY-MM-DD') }).then(res => res.data)
-    report.emotions = Object.keys(report.emotions).map(i => ({ x: Capitalize(i, true), y: parseFloat(report.emotions[i]) }))
+    let report = await axios
+      .post(`/api/classroom/${id}/report`, { date: date.format('YYYY-MM-DD') })
+      .then(res => res.data)
+    report.emotions = Object.keys(report.emotions).map(i => ({
+      x: Capitalize(i, true),
+      y: parseFloat(report.emotions[i])
+    }))
     this.setState({ report })
   }
 
   render () {
     const { classroom } = this.props
-    const { date, report: { emotions, attendances } } = this.state
+    const {
+      date,
+      report: { emotions, attendances }
+    } = this.state
     let id = classroom.id
     let subjectName = classroom.subject.name
     let roomName = classroom.room.name
@@ -144,13 +154,18 @@ class ClassroomReport extends Component {
     return (
       <Container>
         <Title>Classroom Report</Title>
-        <Subtitle>See your students though your eyes</Subtitle>
+        <Subtitle>{subjectName}</Subtitle>
         <br />
         <Row gutter={16}>
           <Col span={16}>
             <ReportBox>
               <InfoTitle>Report</InfoTitle>
-              Date : <DatePicker value={date} onChange={this.onDateChange} disabledDate={(date) => moment(date).isAfter(moment())} />
+              Date :{' '}
+              <DatePicker
+                value={date}
+                onChange={this.onDateChange}
+                disabledDate={date => moment(date).isAfter(moment())}
+              />
               <ReportGraph emotions={emotions} />
             </ReportBox>
           </Col>
@@ -159,17 +174,22 @@ class ClassroomReport extends Component {
               <InfoTitle>Info</InfoTitle>
               <InfoList>
                 <InfoListChild>
-                Subject : <LightText>{subjectName}</LightText>
+                  Subject : <LightText>{subjectName}</LightText>
                 </InfoListChild>
                 <InfoListChild>
-                Room : <LightText>{roomName}</LightText>
+                  Room : <LightText>{roomName}</LightText>
                 </InfoListChild>
                 <InfoListChild>
-                Time : <LightText>{time}</LightText>
+                  Time : <LightText>{time}</LightText>
                 </InfoListChild>
               </InfoList>
-              <Link href={`/classroom/detail?id=${id}`} as={`/classroom/${id}/detail`}>
-                <EnterButton><Icon type='login' /> Start Classroom</EnterButton>
+              <Link
+                href={`/classroom/detail?id=${id}`}
+                as={`/classroom/${id}/detail`}
+              >
+                <EnterButton>
+                  <Icon type='login' /> Start Classroom
+                </EnterButton>
               </Link>
             </InfoBox>
             <InfoBox>

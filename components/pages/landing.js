@@ -13,6 +13,7 @@ import Subtitle from '../commons/Subtitle'
 const LoginButton = styled(Button)`
   background-color: #6d00ed;
   width: 100%;
+  max-width: 450px;
   color: #fff;
   padding: 1.2em;
   font-size: 1.5em;
@@ -21,20 +22,28 @@ const LoginButton = styled(Button)`
   cursor: pointer;
 `
 
+const LandingTitle = styled(Title)`
+  text-align: center;
+`
+
 const SubtitleText = styled(Subtitle)`
   margin-bottom: 1.5em;
 `
 
+const Wrapper = styled(Card)`
+  text-align: center;
+`
+
 export default () => (
   <Container>
-    <Card>
-      <Title>Classnalytic</Title>
+    <Wrapper>
+      <LandingTitle>Classnalytic</LandingTitle>
       <SubtitleText>Make classroom great again</SubtitleText>
 
       <Link href='/login'>
         <LoginButton>Login</LoginButton>
       </Link>
       <CreditBox />
-    </Card>
+    </Wrapper>
   </Container>
 )

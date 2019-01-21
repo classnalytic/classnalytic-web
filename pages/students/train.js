@@ -19,7 +19,7 @@ const StudentSelect = dynamic(import('../../components/pages/student/select'), {
 
 const enhance = compose(
   connect(
-    (state) => state,
+    state => state,
     { setResult, setStudentId, setLoading }
   )
 )
@@ -42,17 +42,29 @@ class StudentNewPage extends Component {
         {loading && <Loader />}
         <Helmet
           htmlAttributes={{ lang: 'th' }}
-          title='Classnalytic | New Student'
+          title='Classnalytic | Train Student'
           meta={[
-            { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0' },
+            {
+              name: 'viewport',
+              content:
+                'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0'
+            },
             { property: 'og:title', content: 'Classnalytic' }
           ]}
         />
         <Protected>
           {!result.length ? (
-            <StudentNew setResult={setResult} setStudentId={setStudentId} setLoading={setLoading} />
+            <StudentNew
+              setResult={setResult}
+              setStudentId={setStudentId}
+              setLoading={setLoading}
+            />
           ) : (
-            <StudentSelect studentId={studentId} setLoading={setLoading} result={result} />
+            <StudentSelect
+              studentId={studentId}
+              setLoading={setLoading}
+              result={result}
+            />
           )}
         </Protected>
       </Fragment>

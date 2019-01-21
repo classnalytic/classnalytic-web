@@ -1,7 +1,6 @@
+import React from 'react'
 import { Row, Col } from 'antd'
 import styled from 'styled-components'
-
-// import Webcam from 'react-webcam';
 
 import Container from '../../commons/Container'
 import CreditBox from '../../commons/CreditBox'
@@ -79,7 +78,7 @@ const ClassroomDetail = ({ classroom }) => {
   return (
     <Container>
       <Title>Classroom Panel</Title>
-      <Subtitle>See your students though your eyes</Subtitle>
+      <Subtitle>{subjectName}</Subtitle>
       <br />
       <Row gutter={16}>
         <Col span={16}>

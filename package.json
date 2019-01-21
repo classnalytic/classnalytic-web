@@ -12,29 +12,23 @@
   "dependencies": {
     "antd": "^3.8.1",
     "axios": "^0.18.0",
-    "babel-plugin-import": "^1.8.0",
-    "babel-plugin-module-resolver": "^3.1.1",
-    "babel-plugin-wrap-in-js": "^1.1.1",
     "express": "^4.16.3",
     "formik": "^1.0.3",
-    "less": "^3.8.1",
-    "less-loader": "^4.1.0",
     "moment": "^2.22.2",
     "next": "^7.0.0",
     "next-images": "^0.10.6",
     "next-redux-wrapper": "^2.0.0",
     "prop-types": "^15.6.2",
-    "qrcode.react": "^0.8.0",
     "raw-loader": "^0.5.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-helmet": "^5.2.0",
-    "react-qr-reader": "^2.1.0",
     "react-redux": "^5.0.1",
+    "react-spinkit": "^3.0.0",
+    "react-spinners": "^0.5.1",
     "react-webcam": "^1.0.4",
     "recompose": "^0.28.2",
     "redux": "^3.6.0",
-    "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
@@ -53,6 +47,10 @@
     ]
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-import": "^1.8.0",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-plugin-wrap-in-js": "^1.1.1",
     "eslint": "^5.11.1",
     "eslint-config-standard": "^12.0.0",
     "eslint-config-standard-react": "^7.0.2",
@@ -62,6 +60,8 @@
     "eslint-plugin-react": "^7.12.2",
     "eslint-plugin-standard": "^4.0.0",
     "http-proxy-middleware": "^0.18.0",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
     "nodemon": "^1.18.3"
   },
   "peerDependencies": {
@@ -69,6 +69,7 @@
     "eslint-plugin-import": ">=2.13.0",
     "eslint-plugin-node": ">=7.0.0",
     "eslint-plugin-promise": ">=4.0.0",
-    "eslint-plugin-standard": ">=4.0.0"
+    "eslint-plugin-standard": ">=4.0.0",
+    "webpack": ">=4.2"
   }
 }

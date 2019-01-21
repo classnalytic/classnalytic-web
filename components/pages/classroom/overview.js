@@ -1,8 +1,9 @@
+import React from 'react'
 import Col from 'antd/lib/col'
 import Row from 'antd/lib/row'
 import Icon from 'antd/lib/icon'
 import styled from 'styled-components'
-import { VictoryPie } from 'victory'
+import { VictoryPie, VictoryTooltip } from 'victory'
 import Link from 'next/link'
 
 import Capitalize from '../../../utils/capitalize'
@@ -53,9 +54,6 @@ const StudentList = styled.ul`
   padding-left: 1.5em;
   margin: 0;
 `
-
-const InfoListChild = styled.li``
-
 const StudentListChild = styled.li`
   font-weight: 300;
 `
@@ -123,27 +121,52 @@ const ClassroomDetail = ({ classroom }) => {
   let actions = classroom.actions
   let emotions = classroom.emotions
 
-  emotions = Object.keys(emotions).map(i => ({ x: Capitalize(i, true), y: parseFloat(emotions[i]) }))
+  emotions = Object.keys(emotions).map(i => ({
+    x: Capitalize(i, true),
+    y: parseFloat(emotions[i])
+  }))
 
-  const colors = ['#0088fe', '#937af3', '#cf69d9', '#f65cb5', '#ff5b8d', '#ff6966', '#ff8042']
+  const colors = [
+    '#0088fe',
+    '#937af3',
+    '#cf69d9',
+    '#f65cb5',
+    '#ff5b8d',
+    '#ff6966',
+    '#ff8042'
+  ]
 
   return (
     <Container>
       <Title>Classroom Overview</Title>
-      <Subtitle>See your students though your eyes</Subtitle>
+      <Subtitle>{subjectName}</Subtitle>
       <br />
       <Row gutter={16}>
         <Col span={16}>
           <ReportBox>
             <InfoTitle>Latest Report</InfoTitle>
-            {emotions.every((e) => e.y === 0) ? <NoDataBox>No Data<br /></NoDataBox>
-              : <VictoryPie
+            {emotions.every(e => e.y === 0) ? (
+              <NoDataBox>
+                No Data
+                <br />
+              </NoDataBox>
+            ) : (
+              <VictoryPie
                 colorScale={colors}
                 data={emotions}
                 sortKey='y'
-                labels={(d) => d.y === 0 ? '' : `${d.x}: ${d.y}%`}
-                style={{ parent: { maxWidth: 400, marginLeft: 'auto', marginRight: 'auto' }, labels: { fontSize: 14 } }}
-              />}
+                labelComponent={<VictoryTooltip />}
+                labels={d => (d.y === 0 ? '' : `${d.x}: ${d.y}%`)}
+                style={{
+                  parent: {
+                    maxWidth: 400,
+                    marginLeft: 'auto',
+                    marginRight: 'auto'
+                  },
+                  labels: { fontSize: 14 }
+                }}
+              />
+            )}
             Emotion Report
           </ReportBox>
         </Col>
@@ -151,21 +174,31 @@ const ClassroomDetail = ({ classroom }) => {
           <InfoBox>
             <InfoTitle>Info</InfoTitle>
             <InfoList>
-              <InfoListChild>
+              <li>
                 Subject : <LightText>{subjectName}</LightText>
-              </InfoListChild>
-              <InfoListChild>
+              </li>
+              <li>
                 Room : <LightText>{roomName}</LightText>
-              </InfoListChild>
-              <InfoListChild>
+              </li>
+              <li>
                 Time : <LightText>{time}</LightText>
-              </InfoListChild>
+              </li>
             </InfoList>
-            <Link href={`/classroom/detail?id=${id}`} as={`/classroom/${id}/detail`}>
-              <EnterButton><Icon type='login' /> Start Classroom</EnterButton>
+            <Link
+              href={`/classroom/detail?id=${id}`}
+              as={`/classroom/${id}/detail`}
+            >
+              <EnterButton>
+                <Icon type='login' /> Start Classroom
+              </EnterButton>
             </Link>{' '}
-            <Link href={`/classroom/report?id=${id}`} as={`/classroom/${id}/report`}>
-              <ReportButton><Icon type='info' /> View Report</ReportButton>
+            <Link
+              href={`/classroom/report?id=${id}`}
+              as={`/classroom/${id}/report`}
+            >
+              <ReportButton>
+                <Icon type='info' /> View Report
+              </ReportButton>
             </Link>
           </InfoBox>
           <InfoBox>

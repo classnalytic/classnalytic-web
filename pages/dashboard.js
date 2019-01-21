@@ -2,20 +2,17 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import Helmet from 'react-helmet'
-import dynamic from 'next/dynamic'
 
 import Loader from '../components/commons/Loader'
 import Protected from '../components/commons/Protected'
 
 import { setClassrooms, setLoading } from '../redux/classroom'
 
-const Dashboard = dynamic(import('../components/pages/dashboard'), {
-  loading: () => <Loader />
-})
+import Dashboard from '../components/pages/dashboard'
 
 const enhance = compose(
   connect(
-    (state) => state,
+    state => state,
     { setClassrooms, setLoading }
   )
 )
@@ -42,11 +39,19 @@ class DashboardPage extends Component {
           htmlAttributes={{ lang: 'th' }}
           title='Classnalytic | Dashboard'
           meta={[
-            { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0' },
+            {
+              name: 'viewport',
+              content:
+                'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0'
+            },
             { property: 'og:title', content: 'Classnalytic' }
           ]}
         />
-        <Protected>{!classrooms.success && <Dashboard classrooms={classrooms} setLoading={setLoading} />}</Protected>
+        <Protected>
+          {!classrooms.success && (
+            <Dashboard classrooms={classrooms} setLoading={setLoading} />
+          )}
+        </Protected>
       </Fragment>
     )
   }

@@ -8,7 +8,7 @@ import { compose } from 'recompose'
 import Form from 'antd/lib/form'
 
 import Container from '../commons/Container'
-import Card from '../commons/Card'
+import FormCard from '../commons/FormCard'
 import TextInput from '../commons/TextInput'
 import Button from '../commons/Button'
 import CreditBox from '../commons/CreditBox'
@@ -30,6 +30,10 @@ const LoginButton = styled(Button)`
     background-color: #aaa;
     cursor: default;
   }
+`
+
+const LoginTitle = styled(Title)`
+  text-align: center;
 `
 
 const enhance = compose(
@@ -77,8 +81,8 @@ const LoginPage = props => {
     <Fragment>
       {loading && <Loader />}
       <Container>
-        <Card>
-          <Title>Login</Title>
+        <FormCard>
+          <LoginTitle>Login</LoginTitle>
           <Form onKeyPress={e => keyEnterPress(e)}>
             <TextInput
               icon='user'
@@ -113,7 +117,7 @@ const LoginPage = props => {
             </LoginButton>
           </Form>
           <CreditBox />
-        </Card>
+        </FormCard>
       </Container>
     </Fragment>
   )

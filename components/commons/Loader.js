@@ -1,7 +1,11 @@
 import React from 'react'
+import { RingLoader } from 'react-spinners'
 import styled from 'styled-components'
 
 const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   top: 0;
   width: 100%;
@@ -12,12 +16,7 @@ const Container = styled.div`
 
 const Loader = () => (
   <Container>
-    <div className='lds-ellipsis'>
-      <div />
-      <div />
-      <div />
-      <div />
-    </div>
+    <RingLoader size={180} color='#6d00ed' />
   </Container>
 )
 

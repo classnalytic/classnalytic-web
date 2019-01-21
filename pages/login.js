@@ -13,9 +13,11 @@ const Login = dynamic(import('../components/pages/login'), {
   loading: () => <Loader />
 })
 
+// import Login from '../components/pages/login'
+
 const enhance = compose(
   connect(
-    (state) => state,
+    state => state,
     { doLogin, setLoading }
   )
 )
@@ -43,11 +45,17 @@ class LoginPage extends Component {
           htmlAttributes={{ lang: 'th' }}
           title='Classnalytic | Login'
           meta={[
-            { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0' },
+            {
+              name: 'viewport',
+              content:
+                'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0'
+            },
             { property: 'og:title', content: 'Classnalytic' }
           ]}
         />
-        {!login && <Login user={user} doLogin={doLogin} setLoading={setLoading} />}
+        {!login && (
+          <Login user={user} doLogin={doLogin} setLoading={setLoading} />
+        )}
       </Fragment>
     )
   }
