@@ -50,6 +50,14 @@ app
       app.render(req, res, actualPage, queryParams)
     })
 
+    // Settings
+
+    server.get('/setting/classroom/:id/edit', (req, res) => {
+      const actualPage = '/setting/classroom/edit'
+      const queryParams = { id: req.params.id }
+      app.render(req, res, actualPage, queryParams)
+    })
+
     server.get('*', (req, res) => {
       return handle(req, res)
     })

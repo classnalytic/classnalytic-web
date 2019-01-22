@@ -127,9 +127,14 @@ const ClassroomContainer = ({
         </Link>
       )}
       {role === 'admin' && (
-        <ConfigButton>
-          <Icon type='setting' /> Config
-        </ConfigButton>
+        <Link
+          href={`/setting/classroom/edit?id=${id}`}
+          as={`/setting/classroom/${id}/edit`}
+        >
+          <ConfigButton>
+            <Icon type='setting' /> Config
+          </ConfigButton>
+        </Link>
       )}
     </ButtonWrapper>
   </ClassroomBox>

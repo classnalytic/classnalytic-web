@@ -1,16 +1,13 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
-// import dynamic from 'next/dynamic'
 
 // import Loader from '../../../components/commons/Loader'
 import Protected from '../../../components/commons/Protected'
 
 import { checkLogin } from '../../../redux/user'
 
-/* const Overview = dynamic(import('../../../components/pages/student/classroom'), {
-  loading: () => <Loader />
-}) */
+import EditClassroom from '../../../components/pages/setting/classroom/edit'
 
 class SettingClassroomPage extends Component {
   static async getInitialProps ({ store, query }) {
@@ -18,6 +15,10 @@ class SettingClassroomPage extends Component {
   }
 
   render () {
+    const {
+      query: { id }
+    } = this.props
+
     return (
       <Fragment>
         {/* {loading && <Loader />} */}
@@ -25,14 +26,23 @@ class SettingClassroomPage extends Component {
           htmlAttributes={{ lang: 'th' }}
           title='Classnalytic | Edit Classroom'
           meta={[
-            { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0' },
+            {
+              name: 'viewport',
+              content:
+                'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0'
+            },
             { property: 'og:title', content: 'Classnalytic' }
           ]}
         />
-        <Protected>Classroom Edit</Protected>
+        <Protected>
+          <EditClassroom id={id} />
+        </Protected>
       </Fragment>
     )
   }
 }
 
-export default connect(state => state, { checkLogin })(SettingClassroomPage)
+export default connect(
+  state => state,
+  { checkLogin }
+)(SettingClassroomPage)

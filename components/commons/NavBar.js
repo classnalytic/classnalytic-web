@@ -103,17 +103,19 @@ class NavBar extends Component {
                     <Icon type='dashboard' /> Dashboard
                   </Menu>
                 </Link>
-                <Link href='/students'>
-                  <Menu>
-                    <Icon type='user' /> Students
-                  </Menu>
-                </Link>
                 {role === 'admin' && (
-                  <Link href='/setting'>
-                    <Menu>
-                      <Icon type='setting' /> Settings
-                    </Menu>
-                  </Link>
+                  <>
+                    <Link href='/students'>
+                      <Menu>
+                        <Icon type='user' /> Students
+                      </Menu>
+                    </Link>
+                    <Link href='/setting'>
+                      <Menu>
+                        <Icon type='setting' /> Settings
+                      </Menu>
+                    </Link>
+                  </>
                 )}
               </Fragment>
             ) : (

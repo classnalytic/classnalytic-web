@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import Helmet from 'react-helmet'
@@ -55,6 +56,15 @@ class DashboardPage extends Component {
       </Fragment>
     )
   }
+}
+
+DashboardPage.propTypes = {
+  classroom: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+    classrooms: PropTypes.array.isRequired
+  }),
+  setLoading: PropTypes.func,
+  setClassrooms: PropTypes.func.isRequired
 }
 
 export default enhance(DashboardPage)
